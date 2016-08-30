@@ -34,13 +34,6 @@ void ft_init_spe_tab(SPE *spe)
 	// spe->spe['%'] = ft_arg_prc;
 }
 
-void *ft_arg_s(void *argument, va_list ap)
-{
-	char *str;
-
-	str = (char*)ap;
-	return(ft_buff(argument, str));
-}
 
 int ft_check_format(char *str, PF *argument, va_list ap)
 {
