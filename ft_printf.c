@@ -34,20 +34,12 @@ void ft_init_spe_tab(SPE *spe)
 	// spe->spe['%'] = ft_arg_prc;
 }
 
-void *ft_arg_d(void *argument, void *ap)
+void *ft_arg_s(void *argument, va_list ap)
 {
 	char *str;
 
-	str = "chibre";
-	return(str);
-}
-
-void *ft_arg_s(void *argument, void *ap)
-{
-	char *str;
-
-	str = "chibre2";
-	return(str);
+	str = (char*)ap;
+	return(ft_buff(argument, str));
 }
 
 int ft_check_format(char *str, PF *argument, va_list ap)
@@ -106,19 +98,7 @@ int main(int ac, char **av)
 	c = 55;
 	d = 'q';
 
-	ft_printf(av[1], s, c, d);
-	// ft_printf("%c test2", d);
-	// ft_printf("te %c st3", c);
-	// ft_printf("%s", s);
+	ft_printf(av[1], s);
+	printf("%.0d\n",0 );
 	return (0);
 }
-			// printf("G_BUFF: %s\n",g_buff );
-			// printf("SPECIFIER %c\n", argument->spec);
-			// printf("FLAGS: precision=%d  width=%d  #=%d  0=%d  -=%d  +=%d  space=%d  hh=%d  h=%d  ll=%d  l=%d  j=%d  z=%d\n",argument->flags[0], argument->flags[1], argument->flags[2], argument->flags[3], argument->flags[4], argument->flags[5], argument->flags[6], argument->flags[7], argument->flags[8], argument->flags[9], argument->flags[10], argument->flags[11], argument->flags[12]);
-
-			// printf("Format: %s\n",argument.format);
-			// argument.format = &str[++i];
-			// argument.index = i;
-			// printf("index = %d                                 i = %d  \n",argument.index, i );
-			// printf("format = %s                                g_buff = %s\n",argument.format , g_buff);
-			// // if (ft_get_flags(argument, str) == -1)
