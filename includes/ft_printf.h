@@ -23,6 +23,7 @@ int  g_i;
 
 typedef struct s_printf t_printf;
 typedef struct s_spec t_spec;
+
 struct s_printf
 {
 	char *format;
@@ -35,10 +36,13 @@ struct s_printf
 
 struct s_spec
 {
-	char c;
-	void* (*ptr)(void *, void *);
+	void *(*spe[128])(void * , void *);
 };
 
+	
+
+
+char 	*ft_get_arg(PF *argument, va_list ap, SPE *spe);
 void 	ft_init_buff();
 int	 	ft_display(PF *argument);
 int		ft_get_flags(PF *argument, va_list apg);
@@ -47,4 +51,16 @@ int		ft_check_width(PF *argument);
 int		ft_check_precision(PF *argument);
 int		ft_check_length(PF *argument);
 int		ft_check_spec(PF *argument);
+void 	*ft_arg_s(void * , void *);
+void 	*ft_arg_ups(void * , void *);
+void 	*ft_arg_c(void * , void *);
+void 	*ft_arg_upc(void * , void *);
+void 	*ft_arg_d(void * , void *);
+void 	*ft_arg_upd(void * , void *);
+void 	*ft_arg_o(void * , void *);
+void 	*ft_arg_u(void * , void *);
+void 	*ft_arg_upu(void * , void *);
+void 	*ft_arg_nospe(void * , void *);
+void 	*ft_arg_upo(void * , void *);
+void 	*ft_arg_s(void * , void *);
 #endif 

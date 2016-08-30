@@ -1,144 +1,143 @@
 #include "includes/ft_printf.h"
 
-int		ft_check_width(PF *chibre)
+int		ft_check_width(PF *argument)
 {
 	int		i;
 	char	*str;
 
-	i = chibre->index;
-	if (ft_isdigit(chibre->format[chibre->index]) && chibre->format[chibre->index] != '0')
+	i = argument->index;
+	if (ft_isdigit(argument->format[argument->index]) && argument->format[argument->index] != '0')
 	{
-		while (ft_isdigit(chibre->format[chibre->index]))
-			chibre->index++;
-		if (chibre->index - i > 0)
+		while (ft_isdigit(argument->format[argument->index]))
+			argument->index++;
+		if (argument->index - i > 0)
 		{
-			chibre->flags[1] = 0;
-			str = ft_strsub(chibre->format, i, chibre->index - i);
-			chibre->flags[1] = ft_atoi((const char*)str);
+			argument->flags[1] = 0;
+			str = ft_strsub(argument->format, i, argument->index - i);
+			argument->flags[1] = ft_atoi((const char*)str);
 			free(str);
 		}
 	}
-	return(chibre->index);
+	return(argument->index);
 }
 
-int		ft_check_precision(PF *chibre)
+int		ft_check_precision(PF *argument)
 {
 	int		i;
 	char	*str;
 
-	if (chibre->format[chibre->index] == '.')
+	if (argument->format[argument->index] == '.')
 	{
-		i = ++chibre->index;
-		while (ft_isdigit(chibre->format[chibre->index]))
-			chibre->index++;
-		if (chibre->index - i > 0)
+		i = ++argument->index;
+		while (ft_isdigit(argument->format[argument->index]))
+			argument->index++;
+		if (argument->index - i > 0)
 		{
-			str = ft_strsub(chibre->format, i, chibre->index - i);
-			chibre->flags[0] = ft_atoi((const char*)str);
+			str = ft_strsub(argument->format, i, argument->index - i);
+			argument->flags[0] = ft_atoi((const char*)str);
 			free(str);
 		}
 	}
-	return(chibre->index);
+	return(argument->index);
 }
 
-int ft_check_flags(PF *chibre)
+int ft_check_flags(PF *argument)
 {
-	while (chibre->format[chibre->index] == '-' || chibre->format[chibre->index] == '+' || chibre->format[chibre->index] == ' ' || chibre->format[chibre->index] == '#' || chibre->format[chibre->index] == '0')
+	while (argument->format[argument->index] == '-' || argument->format[argument->index] == '+' || argument->format[argument->index] == ' ' || argument->format[argument->index] == '#' || argument->format[argument->index] == '0')
 	{
-		if (chibre->format[chibre->index] == '#')
-			chibre->flags[2] = 1;
-		if (chibre->format[chibre->index] == '0')
-			chibre->flags[3] = 1;
-		if (chibre->format[chibre->index] == '-')
-			chibre->flags[4] = 1;
-		if (chibre->format[chibre->index] == '+')
-			chibre->flags[5] = 1;
-		if (chibre->format[chibre->index] == ' ')
-			chibre->flags[6] = 1;
-		chibre->index++;
+		if (argument->format[argument->index] == '#')
+			argument->flags[2] = 1;
+		if (argument->format[argument->index] == '0')
+			argument->flags[3] = 1;
+		if (argument->format[argument->index] == '-')
+			argument->flags[4] = 1;
+		if (argument->format[argument->index] == '+')
+			argument->flags[5] = 1;
+		if (argument->format[argument->index] == ' ')
+			argument->flags[6] = 1;
+		argument->index++;
 	}
-	return(chibre->index);
+	return(argument->index);
 }
 
-int ft_check_length(PF *chibre)
+int ft_check_length(PF *argument)
 {
-	while (chibre->format[chibre->index] == 'h' || chibre->format[chibre->index] == 'l'
-		|| chibre->format[chibre->index] == 'z' || chibre->format[chibre->index] == 'j')
+	while (argument->format[argument->index] == 'h' || argument->format[argument->index] == 'l'
+		|| argument->format[argument->index] == 'z' || argument->format[argument->index] == 'j')
 	{
-		if (chibre->format[chibre->index] == 'z')
-			chibre->flags[12] = 1;
-		else if (chibre->format[chibre->index] == 'j')
-			chibre->flags[11] = 1;
-		else if (chibre->format[chibre->index] == 'h' && chibre->format[chibre->index + 1] == 'h')
+		if (argument->format[argument->index] == 'z')
+			argument->flags[12] = 1;
+		else if (argument->format[argument->index] == 'j')
+			argument->flags[11] = 1;
+		else if (argument->format[argument->index] == 'h' && argument->format[argument->index + 1] == 'h')
 		{
-			chibre->flags[7] = 1;
-			chibre->index++;
+			argument->flags[7] = 1;
+			argument->index++;
 		}
-		else if (chibre->format[chibre->index] == 'h')
-			chibre->flags[8] = 1;
-		else if (chibre->format[chibre->index] == 'l' && chibre->format[chibre->index + 1] == 'l')
+		else if (argument->format[argument->index] == 'h')
+			argument->flags[8] = 1;
+		else if (argument->format[argument->index] == 'l' && argument->format[argument->index + 1] == 'l')
 		{
-			chibre->flags[9] = 1;
-			chibre->index++;
+			argument->flags[9] = 1;
+			argument->index++;
 		}
-		else if (chibre->format[chibre->index] == 'l')
-			chibre->flags[10] = 1;
-		chibre->index++;
+		else if (argument->format[argument->index] == 'l')
+			argument->flags[10] = 1;
+		argument->index++;
 	}
-	return(chibre->index);
+	return(argument->index);
 }
 
-int ft_check_spec(PF *chibre)
+int ft_check_spec(PF *argument)
 {
-	if (chibre->format[chibre->index] == 's')
-		chibre->spec = 's';
-	else if (chibre->format[chibre->index] == 'S')
-		chibre->spec = 'S';
-	else if (chibre->format[chibre->index] == 'p')
-		chibre->spec = 'p';
-	else if (chibre->format[chibre->index] == 'd')
-		chibre->spec = 'd';
-	else if (chibre->format[chibre->index] == 'D')
-		chibre->spec = 'D';
-	else if (chibre->format[chibre->index] == 'i')
-		chibre->spec = 'i';
-	else if (chibre->format[chibre->index] == 'o')
-		chibre->spec = 'o';
-	else if (chibre->format[chibre->index] == 'O')
-		chibre->spec = 'O';
-	else if (chibre->format[chibre->index] == 'u')
-		chibre->spec = 'u';
-	else if (chibre->format[chibre->index] == 'U')
-		chibre->spec = 'U';
-	else if (chibre->format[chibre->index] == 'x')
-		chibre->spec = 'x';
-	else if (chibre->format[chibre->index] == 'X')
-		chibre->spec = 'X';
-	else if (chibre->format[chibre->index] == 'c')
-		chibre->spec = 'c';
-	else if(chibre->format[chibre->index] == 'C')
-		chibre->spec = 'C';
-	return(chibre->index);
+	if (argument->format[argument->index] == 's')
+		argument->spec = 's';
+	else if (argument->format[argument->index] == 'S')
+		argument->spec = 'S';
+	else if (argument->format[argument->index] == 'p')
+		argument->spec = 'p';
+	else if (argument->format[argument->index] == 'd')
+		argument->spec = 'd';
+	else if (argument->format[argument->index] == 'D')
+		argument->spec = 'D';
+	else if (argument->format[argument->index] == 'i')
+		argument->spec = 'i';
+	else if (argument->format[argument->index] == 'o')
+		argument->spec = 'o';
+	else if (argument->format[argument->index] == 'O')
+		argument->spec = 'O';
+	else if (argument->format[argument->index] == 'u')
+		argument->spec = 'u';
+	else if (argument->format[argument->index] == 'U')
+		argument->spec = 'U';
+	else if (argument->format[argument->index] == 'x')
+		argument->spec = 'x';
+	else if (argument->format[argument->index] == 'X')
+		argument->spec = 'X';
+	else if (argument->format[argument->index] == 'c')
+		argument->spec = 'c';
+	else if(argument->format[argument->index] == 'C')
+		argument->spec = 'C';
+	return(argument->index);
 }
 
-int ft_get_flags(PF *chibre, va_list ap)
+int ft_get_flags(PF *argument, va_list ap)
 {
-	chibre->index = 0;
-	while (chibre->format[chibre->index] == '#' || chibre->format[chibre->index] == '0'
-		|| chibre->format[chibre->index] == '-' || chibre->format[chibre->index] == '+'
-		|| chibre->format[chibre->index] == ' ' || chibre->format[chibre->index] == 'h'
-		|| chibre->format[chibre->index] == 'l' || chibre->format[chibre->index] == 'j'
-		|| chibre->format[chibre->index] == 'z' || chibre->format[chibre->index] == '.'
-		|| chibre->format[chibre->index] == '*' || ft_isdigit(chibre->format[chibre->index]))
+	argument->index = 0;
+	while (argument->format[argument->index] == '#' || argument->format[argument->index] == '0'
+		|| argument->format[argument->index] == '-' || argument->format[argument->index] == '+'
+		|| argument->format[argument->index] == ' ' || argument->format[argument->index] == 'h'
+		|| argument->format[argument->index] == 'l' || argument->format[argument->index] == 'j'
+		|| argument->format[argument->index] == 'z' || argument->format[argument->index] == '.'
+		|| argument->format[argument->index] == '*' || ft_isdigit(argument->format[argument->index]))
 	{
-		ft_check_flags(chibre);
-		ft_check_width(chibre);
-		ft_check_precision(chibre);
-		ft_check_length(chibre);
+		ft_check_flags(argument);
+		ft_check_width(argument);
+		ft_check_precision(argument);
+		ft_check_length(argument);
 	}
-	ft_check_spec(chibre);
-	chibre->spec = chibre->format[chibre->index];
-	if (chibre->index == ft_strlen(chibre->format))
+	ft_check_spec(argument);
+	if (argument->index == ft_strlen(argument->format))
 		return (-1);
-	return (chibre->index);
+	return (argument->index);
 }

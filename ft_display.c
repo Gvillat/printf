@@ -13,8 +13,8 @@ void ft_init_buff()
 	g_i = 0;
 }
 
-int ft_display(PF *chibre)
+int ft_display(PF *argument)
 {
-	chibre->ret = write(1, &g_buff, g_i);
-	return(chibre->ret);
+	argument->ret = write(1, &g_buff, g_i);
+	return(argument->ret);
 }
