@@ -118,6 +118,8 @@ int ft_check_spec(PF *argument)
 		argument->spec = 'c';
 	else if(argument->format[argument->index] == 'C')
 		argument->spec = 'C';
+	else
+		argument->spec = argument->format[argument->index];
 	return(argument->index);
 }
 
@@ -137,6 +139,7 @@ int ft_get_flags(PF *argument, va_list ap)
 		ft_check_length(argument);
 	}
 	ft_check_spec(argument);
+	printf("SPECIFIER %c\n",argument->spec );
 	if (argument->index == ft_strlen(argument->format))
 		return (-1);
 	return (argument->index);

@@ -7,6 +7,7 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <stdio.h>
+# include <wchar.h>
 
 char g_buff[4096];
 int  g_i;
@@ -36,10 +37,10 @@ struct s_printf
 
 struct s_spec
 {
-	void *(*spe[128])(void * , va_list);
+	void *(*spe[128])(PF * , va_list);
 };
 
-void 	*ft_arg_d(void *argument, va_list ap);
+void 	*ft_strlower(char *s);
 char 	*ft_itoa_base(uintmax_t nbr, int base);
 void 	*ft_buff(PF *argument, char *str);
 char 	*ft_get_arg(PF *argument, va_list ap, SPE *spe);
@@ -51,16 +52,16 @@ int		ft_check_width(PF *argument);
 int		ft_check_precision(PF *argument);
 int		ft_check_length(PF *argument);
 int		ft_check_spec(PF *argument);
-void 	*ft_arg_s(void * , va_list);
-void 	*ft_arg_ups(void * , va_list);
-void 	*ft_arg_c(void * , va_list);
-void 	*ft_arg_upc(void * , va_list);
-void 	*ft_arg_d(void * , va_list);
-void 	*ft_arg_upd(void * , va_list);
-void 	*ft_arg_o(void * , va_list);
-void 	*ft_arg_u(void * , va_list);
-void 	*ft_arg_upu(void * , va_list);
-void 	*ft_arg_nospe(void * , va_list);
-void 	*ft_arg_upo(void * , va_list);
-void 	*ft_arg_prc(void *, va_list);
+void 	*ft_arg_s(PF * , va_list);
+void 	*ft_arg_p(PF * , va_list);
+void 	*ft_arg_c(PF * , va_list);
+void 	*ft_arg_upc(PF * , va_list);
+void 	*ft_arg_d(PF * , va_list);
+// void 	*ft_arg_upd(PF * , va_list);
+void 	*ft_arg_o(PF * , va_list);
+void 	*ft_arg_u(PF * , va_list);
+void 	*ft_arg_upu(PF * , va_list);
+void 	*ft_arg_nospe(PF * , va_list);
+void 	*ft_arg_upo(PF * , va_list);
+void 	*ft_arg_prc(PF *, va_list);
 #endif 

@@ -12,26 +12,34 @@ PF *ft_init_argument(PF *argument)
 	}
 	argument->format = NULL;
 	argument->index = 0;
-	argument->spec = '\0';
+	argument->spec = ' ';
 	argument->arg = NULL;
 	return (argument);
 }
 
 void ft_init_spe_tab(SPE *spe)
 {
+	int i;
+
+	i = 0;
+	while (i < 128)
+	{
+		spe->spe[i] = ft_arg_nospe;
+		i++;
+	}
+	spe->spe['p'] = ft_arg_p;
 	spe->spe['s'] = ft_arg_s;
-	// spe->spe['S'] = ft_arg_ups;
-	// spe->spe['c'] = ft_arg_c;
-	// spe->spe['C'] = ft_arg_upc;
+	spe->spe['S'] = ft_arg_s;
+	spe->spe['c'] = ft_arg_c;
+	spe->spe['C'] = ft_arg_c;
 	spe->spe['d'] = ft_arg_d;
-	// spe->spe['D'] = ft_arg_upd;
-	// spe->spe['i'] = ft_arg_d;
-	// spe->spe['o'] = ft_arg_o;
-	// spe->spe['O'] = ft_arg_upo;
-	// spe->spe['u'] = ft_arg_u;
-	// spe->spe['U'] = ft_arg_upu;
-	// spe->spe['\0'] = ft_arg_nospe;
-	// spe->spe['%'] = ft_arg_prc;
+	spe->spe['D'] = ft_arg_d;
+	spe->spe['i'] = ft_arg_d;
+	spe->spe['o'] = ft_arg_o;
+	spe->spe['O'] = ft_arg_o;
+	spe->spe['u'] = ft_arg_u;
+	spe->spe['U'] = ft_arg_u;
+	spe->spe['%'] = ft_arg_prc;
 }
 
 
@@ -85,13 +93,16 @@ int main(int ac, char **av)
 {  
 	char *s, c, d;
 	int a;
+	unsigned long int b;
 
+
+	b = 17865;
 	a = 42;
 	s = "argument";
 	c = 55;
 	d = 'q';
 
-	ft_printf(av[1], s);
-	printf("%.0d\n",0 );
+	ft_printf(av[1], b);
+	printf("%lu \n",b);
 	return (0);
 }
