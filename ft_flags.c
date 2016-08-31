@@ -139,7 +139,6 @@ int ft_get_flags(PF *argument, va_list ap)
 		ft_check_length(argument);
 	}
 	ft_check_spec(argument);
-	printf("SPECIFIER %c\n",argument->spec );
 	if (argument->index == ft_strlen(argument->format))
 		return (-1);
 	return (argument->index);

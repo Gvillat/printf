@@ -40,6 +40,8 @@ void ft_init_spe_tab(SPE *spe)
 	spe->spe['u'] = ft_arg_u;
 	spe->spe['U'] = ft_arg_u;
 	spe->spe['%'] = ft_arg_prc;
+	spe->spe['x'] = ft_arg_x;
+	spe->spe['X'] = ft_arg_x;
 }
 
 
@@ -93,7 +95,7 @@ int main(int ac, char **av)
 {  
 	char *s, c, d;
 	int a;
-	unsigned long int b;
+	unsigned int b;
 
 
 	b = 17865;
@@ -103,6 +105,6 @@ int main(int ac, char **av)
 	d = 'q';
 
 	ft_printf(av[1], b);
-	printf("%lu \n",b);
+	printf("%X \n",b);
 	return (0);
 }

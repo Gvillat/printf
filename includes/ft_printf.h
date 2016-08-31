@@ -16,7 +16,7 @@ int  g_i;
 ** fla[13] is an array which contains flags for precision, width, flags
 ** and modifiers such as:
 ** |0        |1    |2|3|4|5|6|7 |8|9 |10|11|12|
-** |precision|width|#|0|-|+| |hh|h|ll|l |j |z |
+ ** |precision|width|#|0|-|+| |hh|h|ll|l |j |z |
 */
 
 // %[flags][width][.precision][length]specifier 
@@ -55,13 +55,10 @@ int		ft_check_spec(PF *argument);
 void 	*ft_arg_s(PF * , va_list);
 void 	*ft_arg_p(PF * , va_list);
 void 	*ft_arg_c(PF * , va_list);
-void 	*ft_arg_upc(PF * , va_list);
 void 	*ft_arg_d(PF * , va_list);
-// void 	*ft_arg_upd(PF * , va_list);
+void 	*ft_arg_x(PF * , va_list);
 void 	*ft_arg_o(PF * , va_list);
 void 	*ft_arg_u(PF * , va_list);
-void 	*ft_arg_upu(PF * , va_list);
 void 	*ft_arg_nospe(PF * , va_list);
-void 	*ft_arg_upo(PF * , va_list);
 void 	*ft_arg_prc(PF *, va_list);
 #endif 

@@ -69,7 +69,28 @@ void *ft_arg_nospe(PF *argument, va_list ap)
 	return(ft_buff(argument, c));
 }
 
-void * ft_strlower(char *s)
+void *ft_arg_x(PF *argument, va_list ap)
+{
+	char *res;
+
+	if (argument->flags[12] == 1 && argument->spec != 'X')
+		res = ft_itoa_base((uintmax_t)((ssize_t)ap),16);
+	else if (argument->flags[11] == 1 && argument->spec != 'X')
+		res = ft_itoa_base((uintmax_t)((uintmax_t)ap),16);
+	else if (argument->flags[10] == 1 || argument->spec == 'X')
+		res = ft_itoa_base((uintmax_t)((unsigned long int)ap),16);
+	else if (argument->flags[9] == 1 && argument->spec != 'X')
+		res = ft_itoa_base((uintmax_t)((unsigned long long int)ap),16);
+	else if (argument->flags[8] == 1 && argument->spec != 'X')
+		res = ft_itoa_base((uintmax_t)((unsigned short int)ap), 16);
+	else if (argument->flags[7] == 1 && argument->spec != 'X')
+		res = ft_itoa_base((uintmax_t)((unsigned char)ap), 16);
+	else if (argument->spec == 'x')
+		res = ft_itoa_base((uintmax_t)((unsigned int)ap), 16);
+	return(ft_buff(argument, ft_strlower(res)));
+}
+
+void *ft_strlower(char *s)
 {
 	int i;
 
