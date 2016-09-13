@@ -95,7 +95,7 @@ int main(int ac, char **av)
 {  
 	char *s, c, d;
 	int a;
-	unsigned int b;
+	int b;
 
 
 	b = 17865;
@@ -104,7 +104,7 @@ int main(int ac, char **av)
 	c = 55;
 	d = 'q';
 
-	ft_printf(av[1], b);
-	printf("%X \n",b);
+	ft_printf(av[1], b, a, s, c, d);
+	printf(av[1],b, a, s, c, d);
 	return (0);
 }
