@@ -152,8 +152,3 @@ void 	*ft_arg_o(PF *argument , va_list ap)
 		res = ft_itoa_base((uintmax_t)((unsigned int)ap), 8);
 	return(ft_buff(argument, res));
 }
-
-// void 	*ft_arg_prc(void *, va_list)
-// {
-
-// }
