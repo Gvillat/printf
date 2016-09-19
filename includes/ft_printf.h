@@ -16,7 +16,7 @@ int  g_i;
 ** fla[13] is an array which contains flags for precision, width, flags
 ** and modifiers such as:
 ** |0        |1    |2|3|4|5|6|7 |8|9 |10|11|12|
- ** |precision|width|#|0|-|+| |hh|h|ll|l |j |z |
+** |precision|width|#|0|-|+| |hh|h|ll|l |j |z |
 */
 
 // %[flags][width][.precision][length]specifier 
@@ -33,6 +33,8 @@ struct s_printf
 	char spec;
 	int flags[13];
 	char *arg;
+	int signe;
+
 };
 
 struct s_spec
@@ -40,18 +42,14 @@ struct s_spec
 	void *(*spe[128])(PF * , va_list);
 };
 
-void 	*ft_strlower(char *s);
-char 	*ft_itoa_base(uintmax_t nbr, int base);
-void 	*ft_buff(PF *argument, char *str);
-char 	*ft_get_arg(PF *argument, va_list ap, SPE *spe);
+/* FT_MEMORY.C */
+
 void 	ft_init_buff();
-int	 	ft_display(PF *argument);
-int		ft_get_flags(PF *argument, va_list apg);
-int		ft_check_flags(PF *argument);
-int		ft_check_width(PF *argument);
-int		ft_check_precision(PF *argument);
-int		ft_check_length(PF *argument);
-int		ft_check_spec(PF *argument);
+PF *	ft_init_argument(PF *argument);
+void 	ft_init_spe_tab(SPE *spe);
+
+/* FT_CONVER.C*/
+
 void 	*ft_arg_s(PF * , va_list);
 void 	*ft_arg_p(PF * , va_list);
 void 	*ft_arg_c(PF * , va_list);
@@ -61,4 +59,34 @@ void 	*ft_arg_o(PF * , va_list);
 void 	*ft_arg_u(PF * , va_list);
 void 	*ft_arg_nospe(PF * , va_list);
 void 	*ft_arg_prc(PF *, va_list);
+
+/* FT_DISPLAY.c */
+ 
+int	 	ft_display(PF *argument);
+void 	*ft_buff(PF *argument, char *str);
+void 	ft_print_char(PF *argument, va_list ap);
+void 	ft_print_unsigned(PF *argument, va_list ap);
+void 	ft_print_str(PF *argument, va_list ap);
+void 	ft_print_signed(PF *argument, va_list ap);
+
+/* LIBPRINTF */ 
+
+void 	*ft_strlower(char *s);
+char 	*ft_itoa_base(uintmax_t nbr, int base);
+int 	ft_signe(int nbr, PF *argument);
+
+
+/* FT_FLAGS.C */
+
+int		ft_check_flags(PF *argument);
+int		ft_check_width(PF *argument);
+int		ft_check_precision(PF *argument);
+int		ft_check_length(PF *argument);
+int		ft_check_spec(PF *argument);
+
+/* FT_ARG.C */
+
+int		ft_get_flags(PF *argument, va_list apg);
+char 	*ft_apply_flags(void *args, PF *argument, va_list ap);
+
 #endif 
