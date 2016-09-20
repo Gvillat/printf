@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-void *ft_apply_width(void *args, PF *argument, va_list ap)
+void *ft_apply_width(void *args, PF *argument, va_list ap, int len)
 {
 	char str[argument->flags[1] + 1];
 	int i;
@@ -27,14 +27,14 @@ void *ft_apply_width(void *args, PF *argument, va_list ap)
 	{
 		if (argument->flags[3])
 		{
-			while (i < argument->flags[1] - ft_strlen(argument->arg))
+			while (i < argument->flags[1] - len)
 				str[i++] = '0';
 			while (argument->arg[j] != '\0')
 				str[i++] = argument->arg[j++];
 		}
 		else
 		{
-			while (i < argument->flags[1] - ft_strlen(argument->arg))
+			while (i < argument->flags[1] - len)
 				str[i++] = ' ';
 			while (argument->arg[j] != '\0')
 				str[i++] = argument->arg[j++];
@@ -45,15 +45,31 @@ void *ft_apply_width(void *args, PF *argument, va_list ap)
 	return (argument->arg);
 }
 
-void *ft_apply_sharp_and_plus(void *args, PF *argument, va_list ap)
+void ft_apply_sharp(void *args, PF *argument, va_list ap, int len)
 {
 	if ((argument->flags[2] && argument->spec == 'x') || argument->spec == 'p')
-		args = ft_strjoin("0x", args);
+		ft_buff(argument, "0x");
 	else if (argument->flags[2] && argument->spec == 'X')
-		args = ft_strjoin("0X", args);
+		ft_buff(argument, "0X");
 	else if (argument->flags[2] && (argument->spec == 'o' || argument->spec == 'O'))
-		args = ft_strjoin
+		ft_buff(argument, "0");
+}
 
+void ft_apply_plus_and_space(void *args, PF *argument, va_list ap, int len)
+{
+	if (argument->flags[5] || argument->flags[6])
+	{
+		if (argument->spec == 'd' || argument->spec == 'D' || argument->spec == 'i')
+		{
+			if (argument->flags[6] == 1 && argument->flags[5] == 0 && (int)ap > 0)
+				ft_buff(argument, " ");
+			if (argument->flags[5] == 1 && (int)ap > 0)
+				ft_buff(argument, "+");
+		}
+	}
+	if (argument->signe == -1)
+		ft_buff(argument, "-");
+	ft_apply_sharp(args, argument, ap, len);
 }
 
 char *ft_apply_flags(void *args, PF *argument, va_list ap)
@@ -61,12 +77,11 @@ char *ft_apply_flags(void *args, PF *argument, va_list ap)
 	int len;
 
 	len = ft_strlen(args);
+	ft_apply_plus_and_space(args, argument, ap, len);
 	if (len < argument->flags[1] && argument->flags[1] > 0)
-		args = ft_apply_width(args, argument, ap); // cree un champ si len < width et check les flags - 0 ' '
-	
-	// check les flags # et -
+		args = ft_apply_width(args, argument, ap, len); // cree un champ si len < width et check les flags - 0 ' '
+	// // check les flags # et -
 	// check precisionpour sqvoir combien char argmettre
-	args = ft_apply_sharp_and_plus(args, argument, ap);
 	return(ft_buff(argument, (char*)args));
 }
 

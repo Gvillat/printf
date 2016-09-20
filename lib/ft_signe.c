@@ -1,13 +1,12 @@
 #include "../includes/ft_printf.h"
 
-int ft_signe(int nbr, PF *argument)
+uintmax_t ft_signe(int nbr, PF *argument)
 {
+	argument->signe = 1;
 	if (nbr < 0)
 	{
 		nbr = -nbr;
 		argument->signe = -1;
 	}
-	else
-		argument->signe = 1;
-	return(nbr);
+	return((intmax_t)nbr);
 }

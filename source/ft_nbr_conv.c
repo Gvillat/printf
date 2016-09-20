@@ -3,10 +3,12 @@
 void *ft_arg_d(PF *argument, va_list ap)
 {
 	char *res;
-	int nbr;
+	intmax_t nbr;
 
 	res = NULL;
-	nbr = ft_signe((int)ap, argument);
+	nbr = (intmax_t)ap;
+	if (argument->flags[10]|| argument->spec != 'D')
+		nbr = ft_signe((int)ap, argument);
 	if (argument->flags[12] == 1 && argument->spec != 'D')
 		res = ft_itoa_base((intmax_t)((ssize_t)nbr), 10);
 	else if (argument->flags[11] == 1 && argument->spec != 'D')
@@ -20,19 +22,16 @@ void *ft_arg_d(PF *argument, va_list ap)
 	else if (argument->flags[7] == 1 && argument->spec != 'D')
 		res = ft_itoa_base((intmax_t)((char)nbr), 10);
 	else if (argument->spec == 'd' || argument->spec == 'i')
-		res = ft_itoa_base((intmax_t)((int)nbr), 10);
+		res = ft_itoa_base((intmax_t)((int)(nbr)), 10);
 	return(ft_apply_flags(res, argument, ap));
 }
 
 void 	*ft_arg_p(PF *argument, va_list ap)
 {
 	void *p;
-	// char *s;
 
-	// s = "0x";
 	p = ft_itoa_base((uintmax_t)(void*)ap, 16);
 	p = (char*)ft_strlower(p);
-	// p = ft_strjoin(s, p);
 	return(ft_apply_flags(p, argument, ap));
 }
 
@@ -102,9 +101,5 @@ void 	*ft_arg_o(PF *argument , va_list ap)
 		res = ft_itoa_base((uintmax_t)((unsigned char)ap), 8);
 	else if (argument->spec == 'o')
 		res = ft_itoa_base((uintmax_t)((unsigned int)ap), 8);
-<<<<<<< HEAD:source/ft_nbr_conv.c
 	return(ft_apply_flags(res, argument, ap));
-=======
-	return(ft_buff(argument, res));
->>>>>>> 407fde21d4811e560d330aa9950ca3a0817cd79e:ft_print_d.c
 }

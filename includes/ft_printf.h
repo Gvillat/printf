@@ -34,7 +34,6 @@ struct s_printf
 	int flags[13];
 	char *arg;
 	int signe;
-
 };
 
 struct s_spec
@@ -73,7 +72,7 @@ void 	ft_print_signed(PF *argument, va_list ap);
 
 void 	*ft_strlower(char *s);
 char 	*ft_itoa_base(uintmax_t nbr, int base);
-int 	ft_signe(int nbr, PF *argument);
+uintmax_t 	ft_signe(int nbr, PF *argument);
 
 
 /* FT_FLAGS.C */
@@ -88,5 +87,6 @@ int		ft_check_spec(PF *argument);
 
 int		ft_get_flags(PF *argument, va_list apg);
 char 	*ft_apply_flags(void *args, PF *argument, va_list ap);
+void 	ft_apply_sharp(void *args, PF *argument, va_list ap, int len);
 
 #endif 
