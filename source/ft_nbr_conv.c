@@ -102,5 +102,9 @@ void 	*ft_arg_o(PF *argument , va_list ap)
 		res = ft_itoa_base((uintmax_t)((unsigned char)ap), 8);
 	else if (argument->spec == 'o')
 		res = ft_itoa_base((uintmax_t)((unsigned int)ap), 8);
+<<<<<<< HEAD:source/ft_nbr_conv.c
 	return(ft_apply_flags(res, argument, ap));
+=======
+	return(ft_buff(argument, res));
+>>>>>>> 407fde21d4811e560d330aa9950ca3a0817cd79e:ft_print_d.c
 }
