@@ -1,90 +1,5 @@
 #include "../includes/ft_printf.h"
 
-void *ft_apply_width(void *args, PF *argument, va_list ap, int len)
-{
-	char str[argument->flags[1] + 1];
-	int i;
-	int j;
-
-	i = 0;
-	argument->arg = args;
-	j = 0;
-	if (argument->flags[4])
-	{
-		while (i < argument->flags[1])
-		{
-			if (argument->arg[j] != '\0')
-			{
-				str[i] = argument->arg[j];
-				j++;
-			}
-			else
-				str[i] = ' ';
-			i++;
-		}
-	}
-	else
-	{
-		if (argument->flags[3])
-		{
-			while (i < argument->flags[1] - len)
-				str[i++] = '0';
-			while (argument->arg[j] != '\0')
-				str[i++] = argument->arg[j++];
-		}
-		else
-		{
-			while (i < argument->flags[1] - len)
-				str[i++] = ' ';
-			while (argument->arg[j] != '\0')
-				str[i++] = argument->arg[j++];
-		}
-	}
-	str[i] = '\0';
-	argument->arg = str;
-	return (argument->arg);
-}
-
-void ft_apply_sharp(void *args, PF *argument, va_list ap, int len)
-{
-	if ((argument->flags[2] && argument->spec == 'x') || argument->spec == 'p')
-		ft_buff(argument, "0x");
-	else if (argument->flags[2] && argument->spec == 'X')
-		ft_buff(argument, "0X");
-	else if (argument->flags[2] && (argument->spec == 'o' || argument->spec == 'O'))
-		ft_buff(argument, "0");
-}
-
-void ft_apply_plus_and_space(void *args, PF *argument, va_list ap, int len)
-{
-	if (argument->flags[5] || argument->flags[6])
-	{
-		if (argument->spec == 'd' || argument->spec == 'D' || argument->spec == 'i')
-		{
-			if (argument->flags[6] == 1 && argument->flags[5] == 0 && (int)ap > 0)
-				ft_buff(argument, " ");
-			if (argument->flags[5] == 1 && (int)ap > 0)
-				ft_buff(argument, "+");
-		}
-	}
-	if (argument->signe == -1)
-		ft_buff(argument, "-");
-	ft_apply_sharp(args, argument, ap, len);
-}
-
-char *ft_apply_flags(void *args, PF *argument, va_list ap)
-{
-	int len;
-
-	len = ft_strlen(args);
-	ft_apply_plus_and_space(args, argument, ap, len);
-	if (len < argument->flags[1] && argument->flags[1] > 0)
-		args = ft_apply_width(args, argument, ap, len); // cree un champ si len < width et check les flags - 0 ' '
-	// // check les flags # et -
-	// check precisionpour sqvoir combien char argmettre
-	return(ft_buff(argument, (char*)args));
-}
-
 int ft_check_format(char *str, PF *argument, va_list ap)
 {
 	int i;
@@ -99,7 +14,7 @@ int ft_check_format(char *str, PF *argument, va_list ap)
 			argument->format = &str[++i];
 			if (ft_get_flags(argument, ap) == -1)
 				return(-1);
-			spe->spe[argument->spec](argument, va_arg(ap, void*));
+			spe->spe[argument->spec](argument, ap);
 			i += argument->index;
 		}
 		else if (str[i] != '%' && str[i] != '\0')

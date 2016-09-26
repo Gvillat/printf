@@ -34,11 +34,13 @@ struct s_printf
 	int flags[13];
 	char *arg;
 	int signe;
+	int zeropadding;
+	int rightpadding;
 };
 
 struct s_spec
 {
-	void *(*spe[128])(PF * , va_list);
+	int (*spe[128])(PF * , va_list);
 };
 
 /* FT_MEMORY.C */
@@ -49,30 +51,32 @@ void 	ft_init_spe_tab(SPE *spe);
 
 /* FT_CONVER.C*/
 
-void 	*ft_arg_s(PF * , va_list);
-void 	*ft_arg_p(PF * , va_list);
-void 	*ft_arg_c(PF * , va_list);
-void 	*ft_arg_d(PF * , va_list);
-void 	*ft_arg_x(PF * , va_list);
-void 	*ft_arg_o(PF * , va_list);
-void 	*ft_arg_u(PF * , va_list);
-void 	*ft_arg_nospe(PF * , va_list);
-void 	*ft_arg_prc(PF *, va_list);
+int		signed_handler(PF *argument, va_list ap);
+int		pointer_handler(PF *argument, va_list ap);
+int		character_handler(PF *argument, va_list ap);
+int		string_handler(PF *argument, va_list ap);
+int		unsigned_handler(PF *argument, va_list ap);
+int 	ft_arg_nospe(PF *argument, va_list ap);
+int 	prc_handler(PF *argument, va_list ap);
+
 
 /* FT_DISPLAY.c */
  
 int	 	ft_display(PF *argument);
 void 	*ft_buff(PF *argument, char *str);
-void 	ft_print_char(PF *argument, va_list ap);
-void 	ft_print_unsigned(PF *argument, va_list ap);
-void 	ft_print_str(PF *argument, va_list ap);
-void 	ft_print_signed(PF *argument, va_list ap);
+int		ft_print_character(PF *argument, char *c);
+int		ft_print_str(PF *argument, char *s);
+int		ft_print_wstr(PF *argument, char *s);
+int		ft_print_number(PF *argument, char *pre, char *s);
 
 /* LIBPRINTF */ 
 
-void 	*ft_strlower(char *s);
-char 	*ft_itoa_base(uintmax_t nbr, int base);
-uintmax_t 	ft_signe(int nbr, PF *argument);
+void 		*ft_strlower(char *s);
+char 		*ft_itoa_base(uintmax_t nbr, int base);
+int			ft_wchartostr(char *s, wchar_t wc);
+void		ft_nputchar(PF *argument, char c, size_t n);
+size_t		ft_wstrlen(wchar_t *s);
+int			ft_wstrtostr(char *s, wchar_t *wstr, int n);
 
 
 /* FT_FLAGS.C */
@@ -86,7 +90,5 @@ int		ft_check_spec(PF *argument);
 /* FT_ARG.C */
 
 int		ft_get_flags(PF *argument, va_list apg);
-char 	*ft_apply_flags(void *args, PF *argument, va_list ap);
-void 	ft_apply_sharp(void *args, PF *argument, va_list ap, int len);
 
 #endif 

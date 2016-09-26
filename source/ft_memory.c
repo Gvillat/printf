@@ -15,6 +15,8 @@ PF *ft_init_argument(PF *argument)
 	argument->spec = ' ';
 	argument->arg = NULL;
 	argument->signe = 0;
+	argument->zeropadding = 0;
+	argument->rightpadding = 1;
 	return (argument);
 }
 
@@ -28,21 +30,21 @@ void ft_init_spe_tab(SPE *spe)
 		spe->spe[i] = ft_arg_nospe;
 		i++;
 	}
-	spe->spe['p'] = ft_arg_p;
-	spe->spe['s'] = ft_arg_s;
-	spe->spe['S'] = ft_arg_s;
-	spe->spe['c'] = ft_arg_c;
-	spe->spe['C'] = ft_arg_c;
-	spe->spe['d'] = ft_arg_d;
-	spe->spe['D'] = ft_arg_d;
-	spe->spe['i'] = ft_arg_d;
-	spe->spe['o'] = ft_arg_o;
-	spe->spe['O'] = ft_arg_o;
-	spe->spe['u'] = ft_arg_u;
-	spe->spe['U'] = ft_arg_u;
-	spe->spe['%'] = ft_arg_prc;
-	spe->spe['x'] = ft_arg_x;
-	spe->spe['X'] = ft_arg_x;
+	spe->spe['p'] = pointer_handler;
+	spe->spe['s'] = string_handler;
+	spe->spe['S'] = string_handler;
+	spe->spe['c'] = character_handler;
+	spe->spe['C'] = character_handler;
+	spe->spe['d'] = signed_handler;
+	spe->spe['D'] = signed_handler;
+	spe->spe['i'] = signed_handler;
+	spe->spe['o'] = unsigned_handler;
+	spe->spe['O'] = unsigned_handler;
+	spe->spe['u'] = unsigned_handler;
+	spe->spe['U'] = unsigned_handler;
+	spe->spe['%'] = prc_handler;
+	spe->spe['x'] = unsigned_handler;
+	spe->spe['X'] = unsigned_handler;
 }
 
 void ft_init_buff()
