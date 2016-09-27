@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_signed_conv.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:35:51 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:35:53 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static intmax_t		signed_cast(PF *argument, va_list ap)
 {
-	intmax_t		n;
+	intmax_t	n;
 
 	n = va_arg(ap, intmax_t);
 	if (argument->flags[7] == 1)
@@ -16,7 +28,7 @@ static intmax_t		signed_cast(PF *argument, va_list ap)
 	else if (argument->flags[12] == 1)
 		n = (size_t)n;
 	else if (argument->flags[11] == 1)
-		return(n);
+		return (n);
 	else
 		n = (int)n;
 	return (n);
@@ -24,8 +36,8 @@ static intmax_t		signed_cast(PF *argument, va_list ap)
 
 int					signed_handler(PF *argument, va_list ap)
 {
-	intmax_t		n;
-  
+	intmax_t	n;
+
 	if (argument->spec == 'd' || argument->spec == 'i')
 		n = signed_cast(argument, ap);
 	else
@@ -39,7 +51,7 @@ int					signed_handler(PF *argument, va_list ap)
 	return (ft_print_number(argument, "", ft_itoa_base(n, 10)));
 }
 
-int				ft_print_number(PF *argument, char *pre, char *s)
+int					ft_print_number(PF *argument, char *pre, char *s)
 {
 	ssize_t		len;
 	ssize_t		precision;

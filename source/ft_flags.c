@@ -1,24 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_flags.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:35:33 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:35:35 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-int		ft_check_width(PF *argument)
+int		ft_check_width(PF *argu)
 {
 	int		i;
 	char	*str;
 
-	i = argument->index;
-	if (ft_isdigit(argument->format[argument->index]) && argument->format[argument->index] != '0')
+	i = argu->index;
+	if (ft_isdigit(argu->format[argu->index])
+		&& argu->format[argu->index] != '0')
 	{
-		while (ft_isdigit(argument->format[argument->index]))
-			argument->index++;
-		if (argument->index - i > 0)
+		while (ft_isdigit(argu->format[argu->index]))
+			argu->index++;
+		if (argu->index - i > 0)
 		{
-			argument->flags[1] = 0;
-			str = ft_strsub(argument->format, i, argument->index - i);
-			argument->flags[1] = ft_atoi((const char*)str);
+			argu->flags[1] = 0;
+			str = ft_strsub(argu->format, i, argu->index - i);
+			argu->flags[1] = ft_atoi((const char*)str);
 			free(str);
 		}
 	}
-	return(argument->index);
+	return (argu->index);
 }
 
 int		ft_check_precision(PF *argument)
@@ -38,57 +51,55 @@ int		ft_check_precision(PF *argument)
 			free(str);
 		}
 	}
-	return(argument->index);
+	return (argument->index);
 }
 
-int ft_check_flags(PF *argument)
+int		ft_check_flags(PF *argu)
 {
-	while (argument->format[argument->index] == '-' || argument->format[argument->index] == '+' || argument->format[argument->index] == ' ' || argument->format[argument->index] == '#' || argument->format[argument->index] == '0')
+	while (argu->format[argu->index] == '-' || argu->format[argu->index] == '+'
+		|| argu->format[argu->index] == ' ' || argu->format[argu->index] == '#'
+		|| argu->format[argu->index] == '0')
 	{
-		if (argument->format[argument->index] == '#')
-			argument->flags[2] = 1;
-		if (argument->format[argument->index] == '0')
-			argument->flags[3] = 1;
-		if (argument->format[argument->index] == '-')
-			argument->flags[4] = 1;
-		if (argument->format[argument->index] == '+')
-			argument->flags[5] = 1;
-		if (argument->format[argument->index] == ' ')
-			argument->flags[6] = 1;
-		argument->index++;
+		if (argu->format[argu->index] == '#')
+			argu->flags[2] = 1;
+		if (argu->format[argu->index] == '0')
+			argu->flags[3] = 1;
+		if (argu->format[argu->index] == '-')
+			argu->flags[4] = 1;
+		if (argu->format[argu->index] == '+')
+			argu->flags[5] = 1;
+		if (argu->format[argu->index] == ' ')
+			argu->flags[6] = 1;
+		argu->index++;
 	}
-	return(argument->index);
+	return (argu->index);
 }
 
-int ft_check_length(PF *argument)
+int		ft_check_length(PF *argu)
 {
-	while (argument->format[argument->index] == 'h' || argument->format[argument->index] == 'l'
-		|| argument->format[argument->index] == 'z' || argument->format[argument->index] == 'j')
+	while (argu->format[argu->index] == 'h' || argu->format[argu->index] == 'l'
+		|| argu->format[argu->index] == 'z' || argu->format[argu->index] == 'j')
 	{
-		if (argument->format[argument->index] == 'z')
-			argument->flags[12] = 1;
-		else if (argument->format[argument->index] == 'j')
-			argument->flags[11] = 1;
-		else if (argument->format[argument->index] == 'h' && argument->format[argument->index + 1] == 'h')
-		{
-			argument->flags[7] = 1;
-			argument->index++;
-		}
-		else if (argument->format[argument->index] == 'h')
-			argument->flags[8] = 1;
-		else if (argument->format[argument->index] == 'l' && argument->format[argument->index + 1] == 'l')
-		{
-			argument->flags[9] = 1;
-			argument->index++;
-		}
-		else if (argument->format[argument->index] == 'l')
-			argument->flags[10] = 1;
-		argument->index++;
+		if (argu->format[argu->index] == 'z')
+			argu->flags[12] = 1;
+		else if (argu->format[argu->index] == 'j')
+			argu->flags[11] = 1;
+		else if (argu->format[argu->index] == 'h'
+			&& argu->format[argu->index++] == 'h')
+			argu->flags[7] = 1;
+		else if (argu->format[argu->index] == 'h')
+			argu->flags[8] = 1;
+		else if (argu->format[argu->index] == 'l'
+			&& argu->format[argu->index++] == 'l')
+			argu->flags[9] = 1;
+		else if (argu->format[argu->index] == 'l')
+			argu->flags[10] = 1;
+		argu->index++;
 	}
-	return(argument->index);
+	return (argu->index);
 }
 
-int ft_check_spec(PF *argument)
+int		ft_check_spec(PF *argument)
 {
 	if (argument->format[argument->index] == 's')
 		argument->spec = 's';
@@ -114,32 +125,5 @@ int ft_check_spec(PF *argument)
 		argument->spec = 'x';
 	else if (argument->format[argument->index] == 'X')
 		argument->spec = 'X';
-	else if (argument->format[argument->index] == 'c')
-		argument->spec = 'c';
-	else if(argument->format[argument->index] == 'C')
-		argument->spec = 'C';
-	else
-		argument->spec = argument->format[argument->index];
-	return(argument->index);
-}
-
-int ft_get_flags(PF *argument, va_list ap)
-{
-	argument->index = 0;
-	while (argument->format[argument->index] == '#' || argument->format[argument->index] == '0'
-		|| argument->format[argument->index] == '-' || argument->format[argument->index] == '+'
-		|| argument->format[argument->index] == ' ' || argument->format[argument->index] == 'h'
-		|| argument->format[argument->index] == 'l' || argument->format[argument->index] == 'j'
-		|| argument->format[argument->index] == 'z' || argument->format[argument->index] == '.'
-		|| argument->format[argument->index] == '*' || ft_isdigit(argument->format[argument->index]))
-	{
-		ft_check_flags(argument);
-		ft_check_width(argument);
-		ft_check_precision(argument);
-		ft_check_length(argument);
-	}
-	ft_check_spec(argument);
-	if (argument->index == ft_strlen(argument->format))
-		return (-1);
-	return (argument->index);
+	return (ft_check_spec_bis(argument));
 }

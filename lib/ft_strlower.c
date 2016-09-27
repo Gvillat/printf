@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlower.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:57:22 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:57:23 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-void *ft_strlower(char *s)
+void	*ft_strlower(char *s)
 {
 	int i;
 
@@ -9,7 +21,7 @@ void *ft_strlower(char *s)
 	{
 		if (s[i] >= 'A' && s[i] <= 'Z')
 			s[i] = ft_tolower(s[i]);
-		i++; 
+		i++;
 	}
-	return(s);
+	return (s);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memory.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:35:38 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:35:40 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-PF *ft_init_argument(PF *argument)
+PF		*ft_init_argument(PF *argument)
 {
 	int i;
 
@@ -20,7 +32,7 @@ PF *ft_init_argument(PF *argument)
 	return (argument);
 }
 
-void ft_init_spe_tab(SPE *spe)
+void	ft_init_spe_tab(SPE *spe)
 {
 	int i;
 
@@ -47,7 +59,7 @@ void ft_init_spe_tab(SPE *spe)
 	spe->spe['X'] = unsigned_handler;
 }
 
-void ft_init_buff()
+void	ft_init_buff(void)
 {
 	int n;
 
@@ -58,4 +70,15 @@ void ft_init_buff()
 		n++;
 	}
 	g_i = 0;
+}
+
+int		ft_check_spec_bis(PF *argument)
+{
+	if (argument->format[argument->index] == 'c')
+		argument->spec = 'c';
+	else if (argument->format[argument->index] == 'C')
+		argument->spec = 'C';
+	else
+		argument->spec = argument->format[argument->index];
+	return (argument->index);
 }

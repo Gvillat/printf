@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_unsigned_conv.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:36:02 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:36:03 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static uintmax_t		unsigned_cast(PF *argument, va_list ap)
@@ -54,16 +66,17 @@ int						unsigned_handler(PF *argument, va_list ap)
 		argument->zeropadding = 1;
 	if (argument->zeropadding == 0 && argument->flags[4] == 1)
 		argument->rightpadding = 0;
-	if (argument->spec == 'x' || argument->spec == 'X' || argument->spec == 'u' || argument->spec == 'o')
+	if (argument->spec == 'x' || argument->spec == 'X'
+		|| argument->spec == 'u' || argument->spec == 'o')
 		n = unsigned_cast(argument, ap);
 	else
 		n = (unsigned long int)va_arg(ap, uintmax_t);
 	if (argument->spec == 'o' || argument->spec == 'O')
 		return (unsigned_helper(argument, ft_itoa_base(n, 8)));
 	else if (argument->spec == 'u' || argument->spec == 'U')
-		return (unsigned_helper(argument, ft_itoa_base(n , 10)));
+		return (unsigned_helper(argument, ft_itoa_base(n, 10)));
 	else if (argument->spec == 'x')
-		return (unsigned_helper(argument, ft_strlower(ft_itoa_base(n , 16))));
+		return (unsigned_helper(argument, ft_strlower(ft_itoa_base(n, 16))));
 	else
 		return (unsigned_helper(argument, ft_itoa_base(n, 16)));
 }

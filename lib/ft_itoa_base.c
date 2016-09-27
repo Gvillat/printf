@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:36:25 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:36:26 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 #include <stdint.h>
 
-
-char *ft_itoa_base(uintmax_t nbr, int base)
+char	*ft_itoa_base(uintmax_t nbr, int base)
 {
-	static char hex[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-	uintmax_t n;
-	intmax_t i;
-	int converted_nbr[64];
-	char *str;
+	static char hex[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+	'A', 'B', 'C', 'D', 'E', 'F'};
+	uintmax_t	n;
+	intmax_t	i;
+	int			converted_nbr[64];
+	char		*str;
 
 	if (nbr == 0)
 		return ("0");
@@ -22,6 +34,6 @@ char *ft_itoa_base(uintmax_t nbr, int base)
 	str = (char*)malloc(sizeof(char *) * --i);
 	str[i + 1] = '\0';
 	while (i >= 0)
-		str[n++] = hex[converted_nbr[i--]]; 
+		str[n++] = hex[converted_nbr[i--]];
 	return (str);
 }

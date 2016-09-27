@@ -1,25 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_char_conv.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 17:35:05 by gvillat           #+#    #+#             */
-/*   Updated: 2016/09/27 17:35:06 by gvillat          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/ft_printf.h"
 
-int					ft_arg_nospe(PF *argument, va_list ap)
+int ft_arg_nospe(PF *argument, va_list ap)
 {
 	char c[2];
 
 	c[0] = argument->spec;
 	c[1] = '\0';
 	ft_print_character(argument, c);
-	return (0);
+	return(0);
 }
 
 static int			wchar_handler(va_list ap, PF *argument)
@@ -55,7 +43,7 @@ int					character_handler(PF *argument, va_list ap)
 	return (0);
 }
 
-int					ft_print_character(PF *argument, char *c)
+int				ft_print_character(PF *argument, char *c)
 {
 	ssize_t		len;
 	ssize_t		padding;

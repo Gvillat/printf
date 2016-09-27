@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_str_conv.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/09/27 17:35:56 by gvillat           #+#    #+#             */
+/*   Updated: 2016/09/27 17:35:59 by gvillat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 static int		wstring_handler(PF *argument, va_list ap)
@@ -32,7 +44,6 @@ int				string_handler(PF *argument, va_list ap)
 		s = ft_strdup(tmp);
 	return (ft_print_str(argument, s));
 }
-
 
 int				ft_print_str(PF *argument, char *s)
 {
