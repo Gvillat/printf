@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-int		ft_get_flags(PF *argu, va_list ap)
+int		ft_get_flags(PF *argu)
 {
 	argu->index = 0;
 	while (argu->format[argu->index] == '#' || argu->format[argu->index] == '0'
@@ -47,7 +47,7 @@ int		ft_check_format(char *str, PF *argument, va_list ap)
 		{
 			ft_init_argument(argument);
 			argument->format = &str[++i];
-			if (ft_get_flags(argument, ap) == -1)
+			if (ft_get_flags(argument) == -1)
 				return (-1);
 			spe->spe[argument->spec](argument, ap);
 			i += argument->index;

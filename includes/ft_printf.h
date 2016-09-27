@@ -38,12 +38,14 @@ typedef struct s_spec	t_spec;
 
 struct	s_printf
 {
-	char	*format;
-	int		ret;
-	size_t	index;
-	char	spec;
-	int		flags[13];
-	char	*arg;
+	char			*format;
+	int				ret;
+	size_t			index;
+	unsigned char	spec;
+	int				flags[13];
+	char			*arg;
+	int				zeropadding;
+	int				rightpadding;
 };
 
 struct	s_spec
@@ -64,7 +66,7 @@ int		ft_arg_nospe(PF *argument, va_list ap);
 int		prc_handler(PF *argument, va_list ap);
 
 int		ft_display(PF *argument);
-void	*ft_buff(PF *argument, char *str);
+void	*ft_buff(char *str);
 int		ft_print_character(PF *argument, char *c);
 int		ft_print_str(PF *argument, char *s);
 int		ft_print_wstr(PF *argument, char *s);
@@ -73,7 +75,7 @@ int		ft_print_number(PF *argument, char *pre, char *s);
 void	*ft_strlower(char *s);
 char	*ft_itoa_base(uintmax_t nbr, int base);
 int		ft_wchartostr(char *s, wchar_t wc);
-void	ft_nputchar(PF *argument, char c, size_t n);
+void	ft_nputchar(char c, size_t n);
 size_t	ft_wstrlen(wchar_t *s);
 int		ft_wstrtostr(char *s, wchar_t *wstr, int n);
 
@@ -84,6 +86,6 @@ int		ft_check_length(PF *argu);
 int		ft_check_spec(PF *argument);
 int		ft_check_spec_bis(PF *argument);
 
-int		ft_get_flags(PF *argu, va_list ap);
+int		ft_get_flags(PF *argu);
 
 #endif

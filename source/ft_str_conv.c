@@ -59,12 +59,12 @@ int				ft_print_str(PF *argument, char *s)
 	if (argument->flags[1] > len)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)
-		ft_nputchar(argument, ' ', padding);
+		ft_nputchar(' ', padding);
 	if (argument->flags[3] == 1)
-		ft_nputchar(argument, '0', padding);
-	ft_buff(argument, s);
+		ft_nputchar('0', padding);
+	ft_buff(s);
 	if (argument->flags[4] == 1)
-		ft_nputchar(argument, ' ', padding);
+		ft_nputchar(' ', padding);
 	free(s);
 	return (0);
 }
@@ -83,12 +83,12 @@ int				ft_print_wstr(PF *argument, char *s)
 	if (argument->flags[1] > len)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)
-		ft_nputchar(argument, ' ', padding);
+		ft_nputchar(' ', padding);
 	if (argument->flags[3] == 1)
-		ft_nputchar(argument, '0', padding);
-	ft_buff(argument, s);
+		ft_nputchar('0', padding);
+	ft_buff(s);
 	if (argument->flags[4] == 1)
-		ft_nputchar(argument, ' ', padding);
+		ft_nputchar(' ', padding);
 	free(s);
 	return (0);
 }

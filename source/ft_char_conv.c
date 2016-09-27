@@ -19,7 +19,7 @@ int					ft_arg_nospe(PF *argument, va_list ap)
 	c[0] = argument->spec;
 	c[1] = '\0';
 	ft_print_character(argument, c);
-	return (0);
+	return ((int)ap);
 }
 
 static int			wchar_handler(va_list ap, PF *argument)
@@ -68,7 +68,7 @@ int					ft_print_character(PF *argument, char *c)
 		ft_nputchar(' ', padding);
 	if (argument->flags[3] == 1)
 		ft_nputchar('0', padding);
-	ft_buff(argument, s);
+	ft_buff(c);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
 	return (0);

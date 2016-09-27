@@ -26,5 +26,5 @@ int		pointer_handler(PF *argument, va_list ap)
 int		prc_handler(PF *argument, va_list ap)
 {
 	ft_print_character(argument, "%");
-	return (0);
+	return ((int)ap);
 }

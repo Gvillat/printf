@@ -26,7 +26,6 @@ PF		*ft_init_argument(PF *argument)
 	argument->index = 0;
 	argument->spec = ' ';
 	argument->arg = NULL;
-	argument->signe = 0;
 	argument->zeropadding = 0;
 	argument->rightpadding = 1;
 	return (argument);

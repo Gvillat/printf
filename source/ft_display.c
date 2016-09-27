@@ -18,7 +18,7 @@ int		ft_display(PF *argument)
 	return (argument->ret);
 }
 
-void	*ft_buff(PF *argument, char *str)
+void	*ft_buff(char *str)
 {
 	int i;
 
