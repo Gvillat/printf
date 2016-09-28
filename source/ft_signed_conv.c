@@ -34,6 +34,18 @@ static intmax_t		signed_cast(PF *argument, va_list ap)
 	return (n);
 }
 
+// static	char		*ft_check_s(PF *argument, char *s)
+// {
+// 	if (!s)
+// 		return (NULL);
+// 	if ((ft_strcmp(s, "0") && argument->flags[0] == 0) && (argument->spec != 'x' || argument->spec != 'X' || argument->spec != 'u' || argument->spec != 'o' ))
+// 	{
+// 		s = NULL;
+// 		return (ft_buff(""));
+// 	}
+// 	return (s);
+// }
+
 int					signed_handler(PF *argument, va_list ap)
 {
 	intmax_t	n;
@@ -60,7 +72,7 @@ int					ft_print_number(PF *argument, char *pre, char *s)
 	len = (ssize_t)ft_strlen(s);
 	precision = 0;
 	padding = 0;
-	if (argument->flags[0] > len)
+	if (argument->flags[0] > len && argument->flags[0] != 0)
 		precision = argument->flags[0] - len;
 	len += (ssize_t)ft_strlen(pre) + precision;
 	if (argument->flags[1] > len)
@@ -71,9 +83,9 @@ int					ft_print_number(PF *argument, char *pre, char *s)
 	if (argument->flags[3] == 1)
 		ft_nputchar('0', padding);
 	ft_nputchar('0', precision);
-	ft_buff(s);
+	// if (!ft_check_s(argument, s))
+		ft_buff(s);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
-	free(s);
 	return (0);
 }

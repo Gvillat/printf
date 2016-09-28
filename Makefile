@@ -1,3 +1,5 @@
+.PHONY: all clean fclean re
+
 NAME = libftprintf.a
 
 CC = clang
@@ -22,8 +24,7 @@ LIBSRC = 	lib/ft_isdigit.c \
 			lib/ft_tolower.c \
 			lib/ft_strdup.c \
 			lib/ft_strcpy.c \
-
-
+			lib/ft_strcmp.c \
 
 SRC =	source/ft_printf.c \
 		source/ft_display.c \
@@ -54,5 +55,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re

@@ -74,7 +74,6 @@ int		ft_printf(const char *format, ...)
 	ft_check_format((char*)format, &argument, ap);
 	if (g_i)
 		ft_display(&argument);
-	ft_putchar('\n');
 	va_end(ap);
 	return (argument.ret);
 }

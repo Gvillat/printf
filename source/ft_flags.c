@@ -85,13 +85,19 @@ int		ft_check_length(PF *argu)
 		else if (argu->format[argu->index] == 'j')
 			argu->flags[11] = 1;
 		else if (argu->format[argu->index] == 'h'
-			&& argu->format[argu->index++] == 'h')
+			&& argu->format[argu->index + 1] == 'h')
+		{
 			argu->flags[7] = 1;
+			argu->index++;
+		}
 		else if (argu->format[argu->index] == 'h')
 			argu->flags[8] = 1;
 		else if (argu->format[argu->index] == 'l'
-			&& argu->format[argu->index++] == 'l')
+			&& argu->format[argu->index + 1] == 'l')
+		{	
 			argu->flags[9] = 1;
+			argu->index++;
+		}
 		else if (argu->format[argu->index] == 'l')
 			argu->flags[10] = 1;
 		argu->index++;
