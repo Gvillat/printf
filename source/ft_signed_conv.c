@@ -34,17 +34,26 @@ static intmax_t		signed_cast(PF *argument, va_list ap)
 	return (n);
 }
 
-// static	char		*ft_check_s(PF *argument, char *s)
-// {
-// 	if (!s)
-// 		return (NULL);
-// 	if ((ft_strcmp(s, "0") && argument->flags[0] == 0) && (argument->spec != 'x' || argument->spec != 'X' || argument->spec != 'u' || argument->spec != 'o' ))
-// 	{
-// 		s = NULL;
-// 		return (ft_buff(""));
-// 	}
-// 	return (s);
-// }
+static char		*correct_string(PF *args, char *s)
+{
+	ssize_t		precision;
+	int			hexprefix;
+	int			octal;
+
+	if (!s)
+		return (NULL);
+	octal = 0;
+	precision = args->flags[0];
+	hexprefix = args->flags[2];
+	if (args->spec == 'o' || args->spec == 'O')
+		octal = 1;
+	if (ft_strcmp((const char *)s, "0") == 0 && precision == 0)
+	{
+		if (!octal || (octal && !hexprefix))
+			return (ft_strdup(""));
+	}
+	return (s);
+}
 
 int					signed_handler(PF *argument, va_list ap)
 {
@@ -69,10 +78,12 @@ int					ft_print_number(PF *argument, char *pre, char *s)
 	ssize_t		precision;
 	ssize_t		padding;
 
+	// if (!(correct_string(argument, s)))
+	// 	return (-1);
 	len = (ssize_t)ft_strlen(s);
 	precision = 0;
 	padding = 0;
-	if (argument->flags[0] > len && argument->flags[0] != 0)
+	if (argument->flags[0] > len)
 		precision = argument->flags[0] - len;
 	len += (ssize_t)ft_strlen(pre) + precision;
 	if (argument->flags[1] > len)
@@ -80,10 +91,12 @@ int					ft_print_number(PF *argument, char *pre, char *s)
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)
 		ft_nputchar(' ', padding);
 	ft_buff(pre);
-	if (argument->flags[3] == 1)
+	if (argument->flags[3] == 1 && argument->flags[4] == 0)
 		ft_nputchar('0', padding);
 	ft_nputchar('0', precision);
-	// if (!ft_check_s(argument, s))
+	if (ft_strcmp(s, "0") == 0 && argument->flags[0] == 0)
+		ft_buff("");
+	else
 		ft_buff(s);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);

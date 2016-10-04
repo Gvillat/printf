@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nputchar.c                                      :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 17:36:29 by gvillat           #+#    #+#             */
-/*   Updated: 2016/09/27 17:36:31 by gvillat          ###   ########.fr       */
+/*   Created: 2015/11/27 19:01:12 by gvillat           #+#    #+#             */
+/*   Updated: 2015/11/29 16:32:59 by gvillat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../includes/libft.h"
 
-void		ft_nputchar(char c, ssize_t n)
+char	*ft_strncat(char *dest, const char *src, size_t n)
 {
-	ssize_t	i;
-	char	s[2];
+	int i;
+	int j;
 
-	s[0] = c;
-	s[1] = '\0';
 	i = 0;
-	while (i < n)
-	{
-		ft_buff(s);
+	j = 0;
+	while (dest[i] != '\0')
 		i++;
+	while (src[j] != '\0' && n != 0)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+		n--;
 	}
+	dest[i] = '\0';
+	return (dest);
 }

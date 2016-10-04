@@ -22,6 +22,7 @@ PF		*ft_init_argument(PF *argument)
 		argument->flags[i] = 0;
 		i++;
 	}
+	argument->flags[0] = -1;
 	argument->format = NULL;
 	argument->index = 0;
 	argument->spec = ' ';

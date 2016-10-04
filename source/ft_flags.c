@@ -42,6 +42,7 @@ int		ft_check_precision(PF *argument)
 	if (argument->format[argument->index] == '.')
 	{
 		i = ++argument->index;
+		argument->flags[0] = 0;
 		while (ft_isdigit(argument->format[argument->index]))
 			argument->index++;
 		if (argument->index - i > 0)

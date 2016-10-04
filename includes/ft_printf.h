@@ -75,9 +75,10 @@ int		ft_print_number(PF *argument, char *pre, char *s);
 void	*ft_strlower(char *s);
 char	*ft_itoa_base(uintmax_t nbr, int base);
 int		ft_wchartostr(char *s, wchar_t wc);
-void	ft_nputchar(char c, size_t n);
+void	ft_nputchar(char c, ssize_t n);
 size_t	ft_wstrlen(wchar_t *s);
 int		ft_wstrtostr(char *s, wchar_t *wstr, int n);
+void	ft_putstr_len(char *s, ssize_t len);
 
 int		ft_check_flags(PF *argu);
 int		ft_check_width(PF *argu);
