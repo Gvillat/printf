@@ -68,7 +68,10 @@ int					ft_print_character(PF *argument, char *c)
 		ft_nputchar(' ', padding);
 	if (argument->flags[3] == 1)
 		ft_nputchar('0', padding);
-	ft_buff(c);
+	if (!c || c[0] == 0)
+		g_i++;
+	else
+		ft_buff(c);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
 	return (0);

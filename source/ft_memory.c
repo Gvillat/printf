@@ -23,12 +23,11 @@ PF		*ft_init_argument(PF *argument)
 		i++;
 	}
 	argument->flags[0] = -1;
+	argument->flags[1] = -1;
 	argument->format = NULL;
 	argument->index = 0;
 	argument->spec = ' ';
 	argument->arg = NULL;
-	argument->zeropadding = 0;
-	argument->rightpadding = 1;
 	return (argument);
 }
 

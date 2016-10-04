@@ -34,22 +34,18 @@ static intmax_t		signed_cast(PF *argument, va_list ap)
 	return (n);
 }
 
-static char		*correct_string(PF *args, char *s)
+static char			*test_string(PF *args, char *s)
 {
-	ssize_t		precision;
-	int			hexprefix;
 	int			octal;
 
 	if (!s)
 		return (NULL);
 	octal = 0;
-	precision = args->flags[0];
-	hexprefix = args->flags[2];
 	if (args->spec == 'o' || args->spec == 'O')
 		octal = 1;
-	if (ft_strcmp((const char *)s, "0") == 0 && precision == 0)
+	if (ft_strcmp((const char *)s, "0") == 0 && args->flags[0] == 0)
 	{
-		if (!octal || (octal && !hexprefix))
+		if (!octal || (octal && !args->flags[2]))
 			return (ft_strdup(""));
 	}
 	return (s);
@@ -78,8 +74,7 @@ int					ft_print_number(PF *argument, char *pre, char *s)
 	ssize_t		precision;
 	ssize_t		padding;
 
-	// if (!(correct_string(argument, s)))
-	// 	return (-1);
+	s = test_string(argument, s);
 	len = (ssize_t)ft_strlen(s);
 	precision = 0;
 	padding = 0;
@@ -88,16 +83,15 @@ int					ft_print_number(PF *argument, char *pre, char *s)
 	len += (ssize_t)ft_strlen(pre) + precision;
 	if (argument->flags[1] > len)
 		padding = argument->flags[1] - len;
-	if (argument->flags[4] == 0 && argument->flags[3] == 0)
+	if (argument->flags[4] == 0 && (argument->flags[3] == 0
+		|| argument->flags[0] != -1))
 		ft_nputchar(' ', padding);
 	ft_buff(pre);
-	if (argument->flags[3] == 1 && argument->flags[4] == 0)
+	if (argument->flags[3] == 1 && argument->flags[4] == 0
+		&& argument->flags[0] == -1)
 		ft_nputchar('0', padding);
 	ft_nputchar('0', precision);
-	if (ft_strcmp(s, "0") == 0 && argument->flags[0] == 0)
-		ft_buff("");
-	else
-		ft_buff(s);
+	ft_buff(s);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
 	return (0);

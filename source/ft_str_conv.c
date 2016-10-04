@@ -78,13 +78,14 @@ int				ft_print_wstr(PF *argument, char *s)
 	ssize_t		padding;
 	char		*tmp;
 
-	tmp = NULL;
 	if (!s)
 		return (-1);
 	len = (ssize_t)ft_strlen(s);
 	padding = 0;
 	if (argument->flags[0] > 0 && argument->flags[0] < len)
 		len = argument->flags[0];
+	if (!(tmp = (char*)malloc(sizeof(len))))
+		return (-1);
 	if (argument->flags[1] > len)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)

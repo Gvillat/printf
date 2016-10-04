@@ -8,10 +8,10 @@ int main(int ac, char **av)
 	unsigned int f;
 
 	f = d;
-	d = -12;
-	e = 0;
-	a = 's';
-	b = 75;
+	d = 0;
+	e = 1;
+	a = 0;
+	b = 0;
 	s = "argument";
 	c = L"ĈЄĈĪ Є$Ŧ ЦИ ŦЄXŦЄ ÐЄ ŦØЦ PØЦR ПØИ PRĪИŦŦ. ʖЄ $ЦĪ$ 42, ЄŦ ʖЄ $ЦĪ$ PRĪИŦŦ.";
 	ft_printf(av[1], a, b, e, d, &f, s);
