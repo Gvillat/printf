@@ -69,7 +69,6 @@ int		ft_display(PF *argument);
 void	*ft_buff(char *str);
 int		ft_print_character(PF *argument, char *c);
 int		ft_print_str(PF *argument, char *s);
-int		ft_print_wstr(PF *argument, char *s);
 int		ft_print_number(PF *argument, char *pre, char *s);
 
 void	*ft_strlower(char *s);

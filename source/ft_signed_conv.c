@@ -17,18 +17,18 @@ static intmax_t		signed_cast(PF *argument, va_list ap)
 	intmax_t	n;
 
 	n = va_arg(ap, intmax_t);
-	if (argument->flags[7] == 1)
-		n = (char)n;
-	else if (argument->flags[8] == 1)
-		n = (short)n;
-	else if (argument->flags[10] == 1)
-		n = (long)n;
-	else if (argument->flags[9] == 1)
-		n = (long long)n;
-	else if (argument->flags[12] == 1)
+	if (argument->flags[12] == 1)
 		n = (size_t)n;
 	else if (argument->flags[11] == 1)
 		return (n);
+	else if (argument->flags[9] == 1)
+		n = (long long)n;
+	else if (argument->flags[10] == 1)
+		n = (long)n;
+	else if (argument->flags[8] == 1)
+		n = (short)n;
+	else if (argument->flags[7] == 1)
+		n = (char)n;
 	else
 		n = (int)n;
 	return (n);

@@ -27,7 +27,7 @@ static int		wstring_handler(PF *argument, va_list ap)
 	if (!(s = ft_strnew((size_t)len)))
 		return (-1);
 	ft_wstrtostr(s, ws, (tmp > -1 && len > tmp) ? tmp : len);
-	return (ft_print_wstr(argument, s));
+	return (ft_print_str(argument, s));
 }
 
 int				string_handler(PF *argument, va_list ap)
@@ -63,38 +63,12 @@ int				ft_print_str(PF *argument, char *s)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)
 		ft_nputchar(' ', padding);
-	if (argument->flags[3] == 1)
+	if (argument->flags[3] == 1 && argument->flags[4] == 0)
 		ft_nputchar('0', padding);
 	ft_buff(ft_strncat(tmp, s, len));
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
-	free(s);
-	return (0);
-}
-
-int				ft_print_wstr(PF *argument, char *s)
-{
-	ssize_t		len;
-	ssize_t		padding;
-	char		*tmp;
-
-	if (!s)
-		return (-1);
-	len = (ssize_t)ft_strlen(s);
-	padding = 0;
-	if (argument->flags[0] > 0 && argument->flags[0] < len)
-		len = argument->flags[0];
-	if (!(tmp = (char*)malloc(sizeof(len))))
-		return (-1);
-	if (argument->flags[1] > len)
-		padding = argument->flags[1] - len;
-	if (argument->flags[4] == 0 && argument->flags[3] == 0)
-		ft_nputchar(' ', padding);
-	if (argument->flags[3] == 1)
-		ft_nputchar('0', padding);
-	ft_buff(ft_strncat(tmp, s, len));
-	if (argument->flags[4] == 1)
-		ft_nputchar(' ', padding);
+	free(tmp);
 	free(s);
 	return (0);
 }

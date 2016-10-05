@@ -39,7 +39,7 @@ static int			wchar_handler(va_list ap, PF *argument)
 		return (-1);
 	ft_wchartostr(s, c);
 	argument->flags[0] = -1;
-	ft_print_number(argument, "", s);
+	ft_print_str(argument, s);
 	return (0);
 }
 
@@ -66,7 +66,7 @@ int					ft_print_character(PF *argument, char *c)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)
 		ft_nputchar(' ', padding);
-	if (argument->flags[3] == 1)
+	if (argument->flags[3] == 1 && argument->flags[4] == 0)
 		ft_nputchar('0', padding);
 	if (!c || c[0] == 0)
 		g_i++;
