@@ -18,28 +18,28 @@ int					ft_arg_nospe(PF *argument, va_list ap)
 
 	c[0] = argument->spec;
 	c[1] = '\0';
-	ft_print_character(argument, c);
+	argument->arg = c;
+	ft_print_character(argument);
 	return ((int)ap);
 }
 
 static int			wchar_handler(va_list ap, PF *argument)
 {
-	wchar_t			c;
-	char			*s;
+	wint_t			c;
 
-	c = (wchar_t)va_arg(ap, wchar_t);
+	c = (wint_t)va_arg(ap, wint_t);
 	if (c == 0)
 	{
-		ft_putchar(0);
+		ft_buff("");
+		g_i++;
 		return (0);
 	}
 	else if (c < 0)
 		return (-1);
-	if (!(s = ft_strnew(4)))
+	if (!(argument->arg = ft_strnew(4)))
 		return (-1);
-	ft_wchartostr(s, c);
-	argument->flags[0] = -1;
-	ft_print_str(argument, s);
+	ft_wchartostr(argument->arg, c);
+	ft_print_str(argument);
 	return (0);
 }
 
@@ -51,11 +51,12 @@ int					character_handler(PF *argument, va_list ap)
 		return (wchar_handler(ap, argument));
 	c[0] = (char)va_arg(ap, int);
 	c[1] = '\0';
-	ft_print_character(argument, c);
+	argument->arg = c;
+	ft_print_character(argument);
 	return (0);
 }
 
-int					ft_print_character(PF *argument, char *c)
+int					ft_print_character(PF *argument)
 {
 	ssize_t		len;
 	ssize_t		padding;
@@ -68,10 +69,10 @@ int					ft_print_character(PF *argument, char *c)
 		ft_nputchar(' ', padding);
 	if (argument->flags[3] == 1 && argument->flags[4] == 0)
 		ft_nputchar('0', padding);
-	if (!c || c[0] == 0)
+	if (!argument->arg || argument->arg[0] == 0)
 		g_i++;
 	else
-		ft_buff(c);
+		ft_buff(argument->arg);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
 	return (0);

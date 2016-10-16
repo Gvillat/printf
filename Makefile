@@ -12,12 +12,10 @@ LIBSRC = 	lib/ft_isdigit.c \
 			lib/ft_itoa_base.c \
 			lib/ft_memset.c \
 			lib/ft_nputchar.c \
-			lib/ft_putchar.c \
 			lib/ft_strlen.c \
 			lib/ft_strlower.c \
 			lib/ft_strnew.c \
 			lib/ft_strsub.c \
-			lib/ft_putchar.c \
 			lib/ft_wstrtostr.c \
 			lib/ft_wchartostr.c \
 			lib/ft_wstrlen.c \

@@ -14,46 +14,39 @@
 
 static int		wstring_handler(PF *argument, va_list ap)
 {
-	wchar_t		*ws;
-	char		*s;
 	ssize_t		len;
 	ssize_t		tmp;
 
-	ws = va_arg(ap, wchar_t *);
-	if (!ws)
-		ws = L"(null)";
+	argument->warg = va_arg(ap, wchar_t *);
+	if (!argument->warg)
+		argument->warg = L"(null)";
 	tmp = argument->flags[1];
-	len = ft_wstrlen(ws) * 4;
-	if (!(s = ft_strnew((size_t)len)))
+	len = ft_wstrlen(argument->warg) * 4;
+	if (!(argument->arg = ft_strnew((size_t)len)))
 		return (-1);
-	ft_wstrtostr(s, ws, (tmp > -1 && len > tmp) ? tmp : len);
-	return (ft_print_str(argument, s));
+	ft_wstrtostr(argument->arg, argument->warg, (tmp > -1 && len > tmp) ? tmp : len);
+	return (ft_print_str(argument));
 }
 
 int				string_handler(PF *argument, va_list ap)
 {
-	char		*tmp;
-	char		*s;
-
 	if (argument->spec == 'S' || argument->flags[10] == 1)
 		return (wstring_handler(argument, ap));
-	tmp = va_arg(ap, char *);
-	if (!tmp)
-		s = ft_strdup("(null)");
-	else
-		s = ft_strdup(tmp);
-	return (ft_print_str(argument, s));
-}
+	argument->arg = va_arg(ap, char *);
+	if (!argument->arg)
+		argument->arg = ft_strdup("(null)");
+	return (ft_print_str(argument));
+} 
 
-int				ft_print_str(PF *argument, char *s)
+int				ft_print_str(PF *argument)
 {
 	ssize_t		len;
 	ssize_t		padding;
 	char		*tmp;
 
-	if (!s)
+	if (!argument->arg)
 		return (-1);
-	len = (ssize_t)ft_strlen(s);
+	len = (ssize_t)ft_strlen(argument->arg);
 	padding = 0;
 	if (argument->flags[0] > -1 && argument->flags[0] < len)
 		len = argument->flags[0];
@@ -65,10 +58,10 @@ int				ft_print_str(PF *argument, char *s)
 		ft_nputchar(' ', padding);
 	if (argument->flags[3] == 1 && argument->flags[4] == 0)
 		ft_nputchar('0', padding);
-	ft_buff(ft_strncat(tmp, s, len));
+	tmp = ft_strsub(argument->arg, 0, len);
+	ft_buff(tmp);
+	free(tmp);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding);
-	free(tmp);
-	free(s);
 	return (0);
 }

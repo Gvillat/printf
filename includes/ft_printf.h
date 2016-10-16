@@ -39,13 +39,11 @@ typedef struct s_spec	t_spec;
 struct	s_printf
 {
 	char			*format;
-	int				ret;
 	size_t			index;
 	unsigned char	spec;
 	int				flags[13];
-	char			*arg;
-	int				zeropadding;
-	int				rightpadding;
+	char 			*arg;
+	wchar_t			*warg;
 };
 
 struct	s_spec
@@ -65,11 +63,12 @@ int		unsigned_handler(PF *argument, va_list ap);
 int		ft_arg_nospe(PF *argument, va_list ap);
 int		prc_handler(PF *argument, va_list ap);
 int		ft_printf(const char *format, ...);
-int		ft_display(PF *argument);
+int		ft_display(void);
 void	*ft_buff(char *str);
-int		ft_print_character(PF *argument, char *c);
-int		ft_print_str(PF *argument, char *s);
-int		ft_print_number(PF *argument, char *pre, char *s);
+
+int		ft_print_character(PF *argument);
+int		ft_print_str(PF *argument);
+int		ft_print_number(PF *argument, char *pre);
 
 void	*ft_strlower(char *s);
 char	*ft_itoa_base(uintmax_t nbr, int base);

@@ -28,6 +28,7 @@ PF		*ft_init_argument(PF *argument)
 	argument->index = 0;
 	argument->spec = ' ';
 	argument->arg = NULL;
+	argument->warg = NULL;
 	return (argument);
 }
 
@@ -68,7 +69,6 @@ void	ft_init_buff(void)
 		g_buff[n] = '\0';
 		n++;
 	}
-	g_i = 0;
 }
 
 int		ft_check_spec_bis(PF *argument)

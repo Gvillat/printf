@@ -66,14 +66,15 @@ int		ft_printf(const char *format, ...)
 	va_list ap;
 	PF		argument;
 
-	argument.ret = 0;
 	if (!format)
-		return (0);
+		return (-1);
+	g_i = 0;
 	va_start(ap, format);
+	ft_init_argument(&argument);
 	ft_init_buff();
 	ft_check_format((char*)format, &argument, ap);
 	if (g_i)
-		ft_display(&argument);
+		ft_display();
 	va_end(ap);
-	return (argument.ret);
+	return (g_i);
 }

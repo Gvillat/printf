@@ -12,10 +12,12 @@
 
 #include "../includes/ft_printf.h"
 
-int		ft_display(PF *argument)
+int		ft_display(void)
 {
-	argument->ret = write(1, &g_buff, g_i);
-	return (argument->ret);
+	int ret;
+	ret = write(1, &g_buff, g_i);
+	ft_init_buff();
+	return (ret);
 }
 
 void	*ft_buff(char *str)
@@ -29,5 +31,7 @@ void	*ft_buff(char *str)
 		i++;
 		g_i++;
 	}
+	if (g_i == 4096)
+		ft_display();
 	return (NULL);
 }

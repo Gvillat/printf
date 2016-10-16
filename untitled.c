@@ -14,8 +14,13 @@ int main(int ac, char **av)
 	b = 75;
 	s = "argument";
 	c = L"ĈЄĈĪ Є$Ŧ ЦИ ŦЄXŦЄ ÐЄ ŦØЦ PØЦR ПØИ PRĪИŦŦ. ʖЄ $ЦĪ$ 42, ЄŦ ʖЄ $ЦĪ$ PRĪИŦŦ.";
-	ft_printf(av[1], a, b, e, d, f, s);
-	printf("\n");
-	printf(av[1], a, b, e, d, f, s);
+	e = ft_printf("%4.15S", L"我是一只猫。");
+	printf("%d \n", e);
+	e = ft_printf("%15.4S", L"我是一只猫。");
+	printf("%d \n", e);
+	e =	ft_printf("%.4S", L"我是一只猫。");
+	printf("%d \n", e);
+	e =	ft_printf("%30S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	printf("%d \n", e);
 	return(0);
 }

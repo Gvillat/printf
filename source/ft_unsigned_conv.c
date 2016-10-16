@@ -51,32 +51,28 @@ static int				unsigned_helper(PF *argument, char *s)
 				argument->flags[0] = len + 1;
 		}
 		else if (argument->spec == 'x' && nullstr != 0)
-			return (ft_print_number(argument, "0x", s));
+			return (ft_print_number(argument, "0x"));
 		else if (argument->spec == 'X' && nullstr != 0)
-			return (ft_print_number(argument, "0X", s));
+			return (ft_print_number(argument, "0X"));
 	}
-	return (ft_print_number(argument, "", s));
+	return (ft_print_number(argument, ""));
 }
 
 int						unsigned_handler(PF *argument, va_list ap)
 {
 	uintmax_t			n;
 
-	if (argument->flags[3] == 1)
-		argument->zeropadding = 1;
-	if (argument->zeropadding == 0 && argument->flags[4] == 1)
-		argument->rightpadding = 0;
 	if (argument->spec == 'x' || argument->spec == 'X'
 		|| argument->spec == 'u' || argument->spec == 'o')
 		n = unsigned_cast(argument, ap);
 	else
 		n = (unsigned long int)va_arg(ap, uintmax_t);
 	if (argument->spec == 'o' || argument->spec == 'O')
-		return (unsigned_helper(argument, ft_itoa_base(n, 8)));
+		return (unsigned_helper(argument, argument->arg = ft_itoa_base(n, 8)));
 	else if (argument->spec == 'u' || argument->spec == 'U')
-		return (unsigned_helper(argument, ft_itoa_base(n, 10)));
+		return (unsigned_helper(argument, argument->arg = ft_itoa_base(n, 10)));
 	else if (argument->spec == 'x')
-		return (unsigned_helper(argument, ft_strlower(ft_itoa_base(n, 16))));
+		return (unsigned_helper(argument, argument->arg = ft_strlower(ft_itoa_base(n, 16))));
 	else
-		return (unsigned_helper(argument, ft_itoa_base(n, 16)));
+		return (unsigned_helper(argument, argument->arg = ft_itoa_base(n, 16)));
 }
