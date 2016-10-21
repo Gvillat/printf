@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void		ft_nputchar(char c, ssize_t n)
+void		ft_nputchar(char c, ssize_t n, PF *argument)
 {
 	ssize_t	i;
 	char	s[2];
@@ -22,7 +22,7 @@ void		ft_nputchar(char c, ssize_t n)
 	i = 0;
 	while (i < n)
 	{
-		ft_buff(s);
+		ft_buff(s, argument);
 		i++;
 	}
 }

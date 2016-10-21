@@ -69,12 +69,13 @@ int		ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	g_i = 0;
+	argument.ret = 0;
 	va_start(ap, format);
 	ft_init_argument(&argument);
 	ft_init_buff();
 	ft_check_format((char*)format, &argument, ap);
 	if (g_i)
-		ft_display();
+		ft_display(&argument);
 	va_end(ap);
-	return (g_i);
+	return (argument.ret);
 }

@@ -95,14 +95,14 @@ int					ft_print_number(PF *argument, char *pre)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && (argument->flags[3] == 0
 		|| argument->flags[0] != -1))
-		ft_nputchar(' ', padding);
-	ft_buff(pre);
+		ft_nputchar(' ', padding, argument);
+	ft_buff(pre, argument);
 	if (argument->flags[3] == 1 && argument->flags[4] == 0
 		&& argument->flags[0] == -1)
-		ft_nputchar('0', padding);
-	ft_nputchar('0', precision);
-	ft_buff(argument->arg);
+		ft_nputchar('0', padding, argument);
+	ft_nputchar('0', precision, argument);
+	ft_buff(argument->arg, argument);
 	if (argument->flags[4] == 1)
-		ft_nputchar(' ', padding);
+		ft_nputchar(' ', padding, argument);
 	return (0);
 }

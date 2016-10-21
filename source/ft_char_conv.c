@@ -30,7 +30,7 @@ static int			wchar_handler(va_list ap, PF *argument)
 	c = (wint_t)va_arg(ap, wint_t);
 	if (c == 0)
 	{
-		ft_buff("");
+		ft_buff("", argument);
 		g_i++;
 		return (0);
 	}
@@ -66,14 +66,14 @@ int					ft_print_character(PF *argument)
 	if (argument->flags[1] > len)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && argument->flags[3] == 0)
-		ft_nputchar(' ', padding);
+		ft_nputchar(' ', padding, argument);
 	if (argument->flags[3] == 1 && argument->flags[4] == 0)
-		ft_nputchar('0', padding);
+		ft_nputchar('0', padding, argument);
 	if (!argument->arg || argument->arg[0] == 0)
 		g_i++;
 	else
-		ft_buff(argument->arg);
+		ft_buff(argument->arg, argument);
 	if (argument->flags[4] == 1)
-		ft_nputchar(' ', padding);
+		ft_nputchar(' ', padding, argument);
 	return (0);
 }

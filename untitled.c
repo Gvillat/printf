@@ -20,7 +20,7 @@ int main(int ac, char **av)
 	printf("%d \n", e);
 	e =	ft_printf("%.4S", L"我是一只猫。");
 	printf("%d \n", e);
-	e =	ft_printf("%30S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+	e =	ft_printf("%15.4S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
 	printf("%d \n", e);
 	return(0);
 }

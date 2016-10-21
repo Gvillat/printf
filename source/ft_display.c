@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/* ***********************************************************9*************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_display.c                                       :+:      :+:    :+:   */
@@ -12,26 +12,28 @@
 
 #include "../includes/ft_printf.h"
 
-int		ft_display(void)
+void		ft_display(PF *argument)
 {
-	int ret;
-	ret = write(1, &g_buff, g_i);
+	argument->ret += write(1, &g_buff, g_i);
 	ft_init_buff();
-	return (ret);
 }
 
-void	*ft_buff(char *str)
+void ft_buf(char c, PF *argument)
+{
+	g_buff[g_i] = c;
+	g_i++;
+	if (g_i == 8192)
+		ft_display(argument);
+}
+
+void	*ft_buff(char *str, PF *argument)
 {
 	int i;
 
 	i = 0;
 	while (str[i] != '\0')
-	{
-		g_buff[g_i] = str[i];
-		i++;
-		g_i++;
+	{		
+		ft_buf(str[i++], argument);
 	}
-	if (g_i == 4096)
-		ft_display();
 	return (NULL);
 }
