@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "../includes/ft_printf.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+char		*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char	*s2;
 	int		i;
@@ -30,7 +30,6 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	}
 	return (s2);
 }
-
 
 char		*ft_wstrsub(wchar_t *ws, unsigned int start, size_t len)
 {

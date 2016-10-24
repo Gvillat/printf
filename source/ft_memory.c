@@ -64,11 +64,12 @@ void	ft_init_buff(void)
 	int n;
 
 	n = 0;
-	while (n < 8192)
+	while (n < 4096)
 	{
 		g_buff[n] = '\0';
 		n++;
 	}
+	g_i = 0;
 }
 
 int		ft_check_spec_bis(PF *argument)

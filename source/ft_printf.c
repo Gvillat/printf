@@ -12,11 +12,6 @@
 
 #include "../includes/ft_printf.h"
 
-// static void ft_free(PF *argument)
-// {
-	
-// }
-
 int		ft_get_flags(PF *argu)
 {
 	argu->index = 0;
@@ -81,7 +76,6 @@ int		ft_printf(const char *format, ...)
 	ft_check_format((char*)format, &argument, ap);
 	if (g_i)
 		ft_display(&argument);
-	// ft_free(&argument);
 	va_end(ap);
 	return (argument.ret);
 }

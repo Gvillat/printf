@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <wchar.h>
 
-char	g_buff[8192];
+char	g_buff[4096];
 int		g_i;
 
 /*
@@ -40,9 +40,9 @@ struct	s_printf
 	size_t			index;
 	unsigned char	spec;
 	int				flags[13];
-	char 			*arg;
+	char			*arg;
 	wchar_t			*warg;
-	int 			ret;
+	int				ret;
 };
 
 struct	s_spec
@@ -58,7 +58,7 @@ int		ft_printf(const char *format, ...);
 
 void	ft_display(PF *argument);
 void	*ft_buff(char *str, PF *argument);
-void 	ft_buf(char c, PF *argument);
+void	ft_buf(char c, PF *argument);
 int		ft_print_character(PF *argument);
 int		ft_print_str(PF *argument);
 int		ft_print_number(PF *argument, char *pre);
@@ -67,6 +67,7 @@ int		ft_print_number(PF *argument, char *pre);
 ** MEMORY
 */
 
+void	ft_free(PF *argument);
 void	ft_init_buff();
 PF		*ft_init_argument(PF *argument);
 void	ft_init_spe_tab(SPE *spe);

@@ -17,6 +17,7 @@ static int		wstring_handler(PF *argument, va_list ap)
 	ssize_t len;
 
 	argument->warg = va_arg(ap, wchar_t *);
+	argument->spec = 'S';
 	if (!argument->warg)
 		argument->warg = L"(null)";
 	len = ft_wbytelen(argument->warg);
@@ -40,14 +41,13 @@ int				string_handler(PF *argument, va_list ap)
 	if (argument->flags[0] > -1 && argument->flags[0] < len)
 		argument->arg = ft_strsub(argument->arg, 0, argument->flags[0]);
 	return (ft_print_str(argument));
-} 
-
+}
 
 int				ft_print_str(PF *argument)
 {
 	ssize_t		len;
 	ssize_t		padding;
-	int i;
+	int			i;
 
 	i = -1;
 	if (!argument->arg)
@@ -65,5 +65,7 @@ int				ft_print_str(PF *argument)
 	ft_buff(argument->arg, argument);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding, argument);
+	if (argument->spec == 'C' || argument->spec == 'S')
+		free(argument->arg);
 	return (0);
 }

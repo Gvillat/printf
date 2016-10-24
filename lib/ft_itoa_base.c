@@ -31,7 +31,8 @@ char	*ft_itoa_base(uintmax_t nbr, int base)
 		converted_nbr[i++] = n % base;
 		n /= base;
 	}
-	str = (char*)malloc(sizeof(char *) * --i);
+	if (!(str = (char*)malloc(sizeof(char *) * --i)))
+		return (NULL);
 	str[i + 1] = '\0';
 	while (i >= 0)
 		str[n++] = hex[converted_nbr[i--]];

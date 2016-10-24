@@ -28,6 +28,7 @@ static int			wchar_handler(va_list ap, PF *argument)
 	wint_t			c;
 
 	c = (wint_t)va_arg(ap, wint_t);
+	argument->spec = 'C';
 	if (c == 0)
 	{
 		ft_buff("", argument);

@@ -46,7 +46,10 @@ static char			*test_string(PF *args)
 	if (ft_strcmp((const char *)args->arg, "0") == 0 && args->flags[0] == 0)
 	{
 		if (!octal || (octal && !args->flags[2]))
-			return (ft_strdup(""));
+		{
+			args->arg = "\0";
+			return (args->arg);
+		}
 	}
 	return (args->arg);
 }
@@ -63,6 +66,7 @@ int					signed_handler(PF *argument, va_list ap)
 	argument->arg = ft_itoa_base(n, 10);
 	if (n < 0)
 	{
+		free(argument->arg);
 		argument->arg = ft_itoa_base(-n, 10);
 		return (ft_print_number(argument, "-"));
 	}
@@ -73,13 +77,23 @@ int					signed_handler(PF *argument, va_list ap)
 	return (ft_print_number(argument, ""));
 }
 
+static int			ft_print_number_bis(PF *argument, int padding)
+{
+	ft_buff(argument->arg, argument);
+	if (argument->flags[4] == 1)
+		ft_nputchar(' ', padding, argument);
+	if (ft_strcmp(argument->arg, "0") != 0 && argument->flags[0] != 0)
+		free(argument->arg);
+	return (0);
+}
+
 int					ft_print_number(PF *argument, char *pre)
 {
 	ssize_t		len;
 	ssize_t		precision;
 	ssize_t		padding;
 
-	argument->arg = test_string(argument);
+	test_string(argument);
 	len = (ssize_t)ft_strlen(argument->arg);
 	precision = 0;
 	padding = 0;
@@ -96,8 +110,5 @@ int					ft_print_number(PF *argument, char *pre)
 		&& argument->flags[0] == -1)
 		ft_nputchar('0', padding, argument);
 	ft_nputchar('0', precision, argument);
-	ft_buff(argument->arg, argument);
-	if (argument->flags[4] == 1)
-		ft_nputchar(' ', padding, argument);
-	return (0);
+	return (ft_print_number_bis(argument, padding));
 }
