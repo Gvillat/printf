@@ -73,11 +73,6 @@ int					signed_handler(PF *argument, va_list ap)
 	return (ft_print_number(argument, ""));
 }
 
-// int ft_do_the_dope_walk(int len, int precision, int padding, PF *argument)
-// {
-// 	return(0);
-// }
-
 int					ft_print_number(PF *argument, char *pre)
 {
 	ssize_t		len;

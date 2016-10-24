@@ -17,11 +17,9 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft.h"
-# include <stdio.h>
 # include <wchar.h>
 
-char	g_buff[8192];
+char	g_buff[4096];
 int		g_i;
 
 /*
@@ -52,12 +50,59 @@ struct	s_spec
 	int (*spe[128])(PF*, va_list);
 };
 
-int			ft_wcharlen(wchar_t wchar);
-char		*ft_wstrsub(wchar_t *ws, unsigned int start, size_t len);
+int		ft_printf(const char *format, ...);
+
+/*
+** DISPLAY
+*/
+
+void	ft_display(PF *argument);
+void	*ft_buff(char *str, PF *argument);
+void 	ft_buf(char c, PF *argument);
+int		ft_print_character(PF *argument);
+int		ft_print_str(PF *argument);
+int		ft_print_number(PF *argument, char *pre);
+
+/*
+** MEMORY
+*/
+
 void	ft_init_buff();
 PF		*ft_init_argument(PF *argument);
 void	ft_init_spe_tab(SPE *spe);
+
+/*
+** LIBPRINTF
+*/
+
+char	*ft_strcpy(char *dst, const char *src);
+char	*ft_strnew(size_t size);
+int		ft_tolower(int c);
+int		ft_wcharlen(wchar_t wchar);
+size_t	ft_wbytelen(wchar_t *ws);
+char	*ft_strdup(const char *s1);
+void	*ft_strlower(char *s);
+int		ft_atoi(const char *nbr);
+char	*ft_itoa_base(uintmax_t nbr, int base);
+int		ft_wchartostr(char *s, wchar_t wc);
+void	ft_nputchar(char c, ssize_t n, PF *argument);
+size_t	ft_strlen(const char *s);
+size_t	ft_wstrlen(wchar_t *s);
+int		ft_wstrtostr(char *s, wchar_t *wstr, int n);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
+char	*ft_wstrsub(wchar_t *ws, unsigned int start, size_t len);
+char	*ft_strsub_with_free(char const *s, unsigned int start, size_t len);
 char	*ft_transform_wchar_in_char(wchar_t *ws);
+int		ft_putwchar_in_char(wchar_t wchar, char *fresh, int i);
+int		ft_strcmp(const char *s1, const char *s2);
+void	*ft_memset(void *dest, int c, size_t n);
+int		ft_isescaped(char c);
+int		ft_isdigit(int c);
+
+/*
+** HANDLER
+*/
+
 int		signed_handler(PF *argument, va_list ap);
 int		pointer_handler(PF *argument, va_list ap);
 int		character_handler(PF *argument, va_list ap);
@@ -65,28 +110,17 @@ int		string_handler(PF *argument, va_list ap);
 int		unsigned_handler(PF *argument, va_list ap);
 int		ft_arg_nospe(PF *argument, va_list ap);
 int		prc_handler(PF *argument, va_list ap);
-int		ft_printf(const char *format, ...);
-void	ft_display(PF *argument);
-void	*ft_buff(char *str, PF *argument);
-void 	ft_buf(char c, PF *argument);
-int		ft_print_character(PF *argument);
-int		ft_print_str(PF *argument);
-int		ft_print_number(PF *argument, char *pre);
-int				ft_print_wstr(PF *argument);
-void	*ft_strlower(char *s);
-char	*ft_itoa_base(uintmax_t nbr, int base);
-int		ft_wchartostr(char *s, wchar_t wc);
-void	ft_nputchar(char c, ssize_t n, PF *argument);
-size_t	ft_wstrlen(wchar_t *s);
-int		ft_wstrtostr(char *s, wchar_t *wstr, int n);
-void	ft_precision_string(PF *argument);
+
+/*
+** FLAGS
+*/
+
+int		ft_get_flags(PF *argu);
 int		ft_check_flags(PF *argu);
 int		ft_check_width(PF *argu);
 int		ft_check_precision(PF *argument);
 void	ft_check_length(PF *argu);
 int		ft_check_spec(PF *argument);
 int		ft_check_spec_bis(PF *argument);
-char		*ft_strsub_with_free(char const *s, unsigned int start, size_t len);
-int		ft_get_flags(PF *argu);
 
 #endif

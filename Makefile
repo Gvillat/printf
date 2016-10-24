@@ -23,7 +23,7 @@ LIBSRC = 	lib/ft_isdigit.c \
 			lib/ft_strdup.c \
 			lib/ft_strcpy.c \
 			lib/ft_strcmp.c \
-			lib/ft_strncat.c \
+			lib/ft_wcharlen.c \
 
 SRC =	source/ft_printf.c \
 		source/ft_display.c \

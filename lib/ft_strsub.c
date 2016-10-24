@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../includes/libft.h"
 #include "../includes/ft_printf.h"
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
