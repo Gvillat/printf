@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <wchar.h>
 
-char	g_buff[4096];
+char	g_buff[8192];
 int		g_i;
 
 /*

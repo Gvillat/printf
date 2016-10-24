@@ -22,7 +22,7 @@ void ft_buf(char c, PF *argument)
 {
 	g_buff[g_i] = c;
 	g_i++;
-	if (g_i == 4096)
+	if (g_i == 8192)
 		ft_display(argument);
 }
 
