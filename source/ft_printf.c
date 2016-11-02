@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-int		ft_get_flags(PF *argu)
+int		ft_get_flags(PF *argu, va_list ap)
 {
 	argu->index = 0;
 	while (argu->format[argu->index] == '#' || argu->format[argu->index] == '0'
@@ -24,8 +24,8 @@ int		ft_get_flags(PF *argu)
 		ft_isdigit(argu->format[argu->index]))
 	{
 		ft_check_flags(argu);
-		ft_check_width(argu);
-		ft_check_precision(argu);
+		ft_check_width(argu, ap);
+		ft_check_precision(argu, ap);
 		ft_check_length(argu);
 	}
 	ft_check_spec(argu);
@@ -47,7 +47,7 @@ int		ft_check_format(char *str, PF *argument, va_list ap)
 		{
 			ft_init_argument(argument);
 			argument->format = &str[++i];
-			if (ft_get_flags(argument) == -1)
+			if (ft_get_flags(argument, ap) == -1)
 				return (-1);
 			spe->spe[argument->spec](argument, ap);
 			i += argument->index;
@@ -56,6 +56,7 @@ int		ft_check_format(char *str, PF *argument, va_list ap)
 		{
 			g_buff[g_i] = str[i];
 			g_i++;
+			// ft_display(str[i], argument);
 		}
 	}
 	return (0);

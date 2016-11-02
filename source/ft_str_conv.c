@@ -36,7 +36,7 @@ int				string_handler(PF *argument, va_list ap)
 		return (wstring_handler(argument, ap));
 	argument->arg = va_arg(ap, char *);
 	if (!argument->arg)
-		argument->arg = ft_strdup("(null)");
+		argument->arg = "(null)";
 	len = ft_strlen(argument->arg);
 	if (argument->flags[0] > -1 && argument->flags[0] < len)
 		argument->arg = ft_strsub(argument->arg, 0, argument->flags[0]);

@@ -14,12 +14,14 @@
 # define FT_PRINTF_H
 # define PF t_printf
 # define SPE t_spec
+# define BUFF_MAX 42
+# define FD 1
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <wchar.h>
 
-char	g_buff[4096];
+char	g_buff[BUFF_MAX];
 int		g_i;
 
 /*
@@ -57,6 +59,7 @@ int		ft_printf(const char *format, ...);
 */
 
 void	ft_display(PF *argument);
+// void 	ft_display(char c, PF *argument);
 void	*ft_buff(char *str, PF *argument);
 void	ft_buf(char c, PF *argument);
 int		ft_print_character(PF *argument);
@@ -76,12 +79,10 @@ void	ft_init_spe_tab(SPE *spe);
 ** LIBPRINTF
 */
 
-char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strnew(size_t size);
 int		ft_tolower(int c);
 int		ft_wcharlen(wchar_t wchar);
 size_t	ft_wbytelen(wchar_t *ws);
-char	*ft_strdup(const char *s1);
 void	*ft_strlower(char *s);
 int		ft_atoi(const char *nbr);
 char	*ft_itoa_base(uintmax_t nbr, int base);
@@ -116,10 +117,11 @@ int		prc_handler(PF *argument, va_list ap);
 ** FLAGS
 */
 
-int		ft_get_flags(PF *argu);
+int		ft_wildcard(PF *argument, va_list ap, int index);
+int		ft_get_flags(PF *argu, va_list ap);
 int		ft_check_flags(PF *argu);
-int		ft_check_width(PF *argu);
-int		ft_check_precision(PF *argument);
+int		ft_check_width(PF *argu, va_list ap);
+int		ft_check_precision(PF *argument, va_list ap);
 void	ft_check_length(PF *argu);
 int		ft_check_spec(PF *argument);
 int		ft_check_spec_bis(PF *argument);

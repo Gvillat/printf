@@ -20,8 +20,6 @@ LIBSRC = 	lib/ft_isdigit.c \
 			lib/ft_wchartostr.c \
 			lib/ft_wstrlen.c \
 			lib/ft_tolower.c \
-			lib/ft_strdup.c \
-			lib/ft_strcpy.c \
 			lib/ft_strcmp.c \
 			lib/ft_wcharlen.c \
 
@@ -34,6 +32,7 @@ SRC =	source/ft_printf.c \
 		source/ft_str_conv.c \
 		source/ft_signed_conv.c \
 		source/ft_unsigned_conv.c\
+		source/ft_wildcard.c\
 		$(LIBSRC)\
 
 OBJ = $(SRC:.c=.o)

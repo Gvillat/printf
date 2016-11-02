@@ -57,7 +57,7 @@ static char			*test_string(PF *args)
 int					signed_handler(PF *argument, va_list ap)
 {
 	intmax_t	n;
-
+	
 	n = 0;
 	if (argument->spec == 'd' || argument->spec == 'i')
 		n = signed_cast(argument, ap);

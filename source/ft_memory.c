@@ -38,11 +38,10 @@ void	ft_init_spe_tab(SPE *spe)
 
 	i = 0;
 	while (i < 128)
-	{
-		spe->spe[i] = ft_arg_nospe;
-		i++;
-	}
-	spe->spe['p'] = pointer_handler;
+		spe->spe[i++] = ft_arg_nospe;
+	// spe->spe['F'] = float_handler;
+≈	// spe->spe['f'] = float_handler;
+≈	spe->spe['p'] = pointer_handler;
 	spe->spe['s'] = string_handler;
 	spe->spe['S'] = string_handler;
 	spe->spe['c'] = character_handler;
@@ -64,7 +63,7 @@ void	ft_init_buff(void)
 	int n;
 
 	n = 0;
-	while (n < 4096)
+	while (n < BUFF_MAX)
 	{
 		g_buff[n] = '\0';
 		n++;
@@ -78,6 +77,10 @@ int		ft_check_spec_bis(PF *argument)
 		argument->spec = 'c';
 	else if (argument->format[argument->index] == 'C')
 		argument->spec = 'C';
+	else if (argument->format[argument->index] == 'F')
+		argument->spec = 'F';
+	else if (argument->format[argument->index] == 'f')
+		argument->spec = 'f';
 	else
 		argument->spec = argument->format[argument->index];
 	return (argument->index);
