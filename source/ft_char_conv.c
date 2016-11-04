@@ -35,7 +35,7 @@ static int			wchar_handler(va_list ap, PF *argument)
 		g_i++;
 		return (0);
 	}
-	if (c < 0)
+	else if (c < 0)
 		return (-1);
 	if (!(argument->arg = ft_strnew(4)))
 		return (-1);
