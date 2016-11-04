@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # define PF t_printf
 # define SPE t_spec
-# define BUFF_MAX 42
+# define BUFF_MAX 4096
 # define FD 1
 # include <stdarg.h>
 # include <unistd.h>
@@ -30,7 +30,7 @@ int		g_i;
 ** |0        |1    |2|3|4|5|6|7 |8|9 |10|11|12|
 ** |precision|width|#|0|-|+| |hh|h|ll|l |j |z |
 ** %[flags][width][.precision][length]specifier
-** specifier : s S p d D i o O u U x X c C
+** specifier : s S p d D i o O u U x X c C b
 */
 
 typedef struct s_printf	t_printf;
@@ -59,7 +59,6 @@ int		ft_printf(const char *format, ...);
 */
 
 void	ft_display(PF *argument);
-// void 	ft_display(char c, PF *argument);
 void	*ft_buff(char *str, PF *argument);
 void	ft_buf(char c, PF *argument);
 int		ft_print_character(PF *argument);

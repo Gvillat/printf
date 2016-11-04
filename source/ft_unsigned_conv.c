@@ -63,7 +63,7 @@ int						unsigned_handler(PF *argument, va_list ap)
 	uintmax_t			n;
 
 	if (argument->spec == 'x' || argument->spec == 'X'
-		|| argument->spec == 'u' || argument->spec == 'o')
+		|| argument->spec == 'u' || argument->spec == 'o' || argument->spec == 'b')
 		n = unsigned_cast(argument, ap);
 	else
 		n = (unsigned long int)va_arg(ap, uintmax_t);
@@ -73,6 +73,8 @@ int						unsigned_handler(PF *argument, va_list ap)
 		argument->arg = ft_itoa_base(n, 10);
 	else if (argument->spec == 'x')
 		argument->arg = ft_strlower(ft_itoa_base(n, 16));
+	else if (argument->spec == 'b')
+		argument->arg = ft_itoa_base(n, 2);
 	else
 		argument->arg = ft_itoa_base(n, 16);
 	return (unsigned_helper(argument));

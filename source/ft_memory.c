@@ -39,9 +39,7 @@ void	ft_init_spe_tab(SPE *spe)
 	i = 0;
 	while (i < 128)
 		spe->spe[i++] = ft_arg_nospe;
-	// spe->spe['F'] = float_handler;
-≈	// spe->spe['f'] = float_handler;
-≈	spe->spe['p'] = pointer_handler;
+	spe->spe['p'] = pointer_handler;
 	spe->spe['s'] = string_handler;
 	spe->spe['S'] = string_handler;
 	spe->spe['c'] = character_handler;
@@ -56,6 +54,7 @@ void	ft_init_spe_tab(SPE *spe)
 	spe->spe['%'] = prc_handler;
 	spe->spe['x'] = unsigned_handler;
 	spe->spe['X'] = unsigned_handler;
+	spe->spe['b'] = unsigned_handler;
 }
 
 void	ft_init_buff(void)

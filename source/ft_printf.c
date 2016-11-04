@@ -53,11 +53,7 @@ int		ft_check_format(char *str, PF *argument, va_list ap)
 			i += argument->index;
 		}
 		else if (str[i] != '%' && str[i] != '\0')
-		{
-			g_buff[g_i] = str[i];
-			g_i++;
-			// ft_display(str[i], argument);
-		}
+			ft_buf(str[i], argument);
 	}
 	return (0);
 }

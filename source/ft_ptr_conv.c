@@ -21,19 +21,10 @@ int		pointer_handler(PF *argument, va_list ap)
 		return (-1);
 	return (ft_print_number(argument, "0x"));
 }
-	 
+	
+int		prc_handler(PF *argument, va_list ap)	 
 {
 	argument->arg = "%";
 	ft_print_character(argument);
 	return ((int)ap);
 }
-
-// int		float_handler(PF *argument, va_list ap)
-// {
-// 	char *s[3];
-// 	double n;
-
-// 	if (argument->spec == 'f')
-// 		n = va_arg(ap, double)
-	
-// }
