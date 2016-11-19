@@ -1,55 +1,57 @@
-.PHONY: all clean fclean re
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gvillat <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/11/30 12:31:10 by gvillat           #+#    #+#              #
+#    Updated: 2016/06/06 16:56:24 by gvillat          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME = libftprintf.a
+.PHONY: all clean fclean re norme
 
-CC = clang
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
-LIBSRC = 	lib/ft_isdigit.c \
-			lib/ft_isescaped.c \
-			lib/ft_atoi.c \
-			lib/ft_itoa_base.c \
-			lib/ft_memset.c \
-			lib/ft_nputchar.c \
-			lib/ft_strlen.c \
-			lib/ft_strlower.c \
-			lib/ft_strnew.c \
-			lib/ft_strsub.c \
-			lib/ft_wstrtostr.c \
-			lib/ft_wchartostr.c \
-			lib/ft_wstrlen.c \
-			lib/ft_tolower.c \
-			lib/ft_strcmp.c \
-			lib/ft_wcharlen.c \
+NAME = ft_ls
 
-SRC =	source/ft_printf.c \
-		source/ft_display.c \
-		source/ft_flags.c \
-		source/ft_memory.c \
-		source/ft_char_conv.c \
-		source/ft_ptr_conv.c \
-		source/ft_str_conv.c \
-		source/ft_signed_conv.c \
-		source/ft_unsigned_conv.c\
-		source/ft_wildcard.c\
-		$(LIBSRC)\
+SRC_PATH = ./sources
+OBJ_PATH = ./obj
 
-OBJ = $(SRC:.c=.o)
+SRC_NAME =	ft_error.c\
+			ft_l.c\
+			ft_sort.c\
+			ft_memory.c\
+			ft_read.c\
+			ft_opt.c\
+			main.c\
+
+OBJ_NAME = $(SRC_NAME:.c=.o)
+
+SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $@ $^
-	ranlib $@
+	@make -C libft
+	@$(CC) $(FLAGS) -o $@ $^ libft/libft.a libftprintf.a
+	@echo "\033[1;34mft_ls\t\t\033[1;33mCompilation\t\033[0;32m-OK-\033[0m"
 
-%.o:%.c
-	$(CC) $(CFLAGS) -c -I includes/ -o $@ $^
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ)
+	@rm -rf $(OBJ)
+	@echo "\033[1;34mft_ls\t\033[1;33mCleaning obj\t\033[0;32m-OK-\033[0m"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -rf ./obj $(NAME)
+	@echo "\033[1;34mft_ls\t\033[1;33mCleaning lib\t\033[0;32m-OK-\033[0m"
+	@cd ./libft && $(MAKE) fclean
 
 re: fclean all
