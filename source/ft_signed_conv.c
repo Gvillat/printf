@@ -89,17 +89,17 @@ static int			ft_print_number_bis(PF *argument, int padding)
 
 int					ft_print_number(PF *argument, char *pre)
 {
-	ssize_t		len;
-	ssize_t		precision;
-	ssize_t		padding;
+	int		len;
+	int		precision;
+	int		padding;
 
 	test_string(argument);
-	len = (ssize_t)ft_strlen(argument->arg);
+	len = ft_strlen(argument->arg);
 	precision = 0;
 	padding = 0;
 	if (argument->flags[0] > len)
 		precision = argument->flags[0] - len;
-	len += (ssize_t)ft_strlen(pre) + precision;
+	len += ft_strlen(pre) + precision;
 	if (argument->flags[1] > len)
 		padding = argument->flags[1] - len;
 	if (argument->flags[4] == 0 && (argument->flags[3] == 0

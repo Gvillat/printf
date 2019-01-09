@@ -6,7 +6,7 @@
 /*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 17:35:05 by gvillat           #+#    #+#             */
-/*   Updated: 2016/09/27 17:35:06 by gvillat          ###   ########.fr       */
+/*   Updated: 2018/11/19 14:20:54 by guvillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ static int			wchar_handler(va_list ap, PF *argument)
 	argument->spec = 'C';
 	if (c == 0)
 	{
-		ft_buff("", argument);
-		g_i++;
-		return (0);
+		if (argument->flags[4])
+			g_i++;
+		ft_nputchar(' ', argument->flags[1] - 1, argument);
+		if (!argument->flags[4])
+			g_i++;
+		return(0);
 	}
 	else if (c < 0)
 		return (-1);
@@ -76,5 +79,5 @@ int					ft_print_character(PF *argument)
 		ft_buff(argument->arg, argument);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding, argument);
-	return (0);
+	return (len);
 }

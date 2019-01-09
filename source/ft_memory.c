@@ -55,6 +55,8 @@ void	ft_init_spe_tab(SPE *spe)
 	spe->spe['x'] = unsigned_handler;
 	spe->spe['X'] = unsigned_handler;
 	spe->spe['b'] = unsigned_handler;
+	spe->spe['f'] = float_handler;
+	spe->spe['F'] = float_handler;
 }
 
 void	ft_init_buff(void)
@@ -76,9 +78,9 @@ int		ft_check_spec_bis(PF *argument)
 		argument->spec = 'c';
 	else if (argument->format[argument->index] == 'C')
 		argument->spec = 'C';
-	else if (argument->format[argument->index] == 'F')
-		argument->spec = 'F';
 	else if (argument->format[argument->index] == 'f')
+		argument->spec = 'f';
+		else if (argument->format[argument->index] == 'F')
 		argument->spec = 'f';
 	else
 		argument->spec = argument->format[argument->index];

@@ -1,4 +1,3 @@
-.PHONY: all clean fclean re
 
 NAME = libftprintf.a
 
@@ -33,6 +32,7 @@ SRC =	source/ft_printf.c \
 		source/ft_signed_conv.c \
 		source/ft_unsigned_conv.c\
 		source/ft_wildcard.c\
+		main2.c\
 		$(LIBSRC)\
 
 OBJ = $(SRC:.c=.o)
@@ -40,6 +40,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	$(CC) -g $(CFLAGS) $(SRC) 
 	ar rc $@ $^
 	ranlib $@
 
@@ -53,3 +54,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

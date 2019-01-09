@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # define PF t_printf
 # define SPE t_spec
-# define BUFF_MAX 4096
+# define BUFF_MAX 128
 # define FD 1
 # include <stdarg.h>
 # include <unistd.h>
@@ -30,7 +30,8 @@ int		g_i;
 ** |0        |1    |2|3|4|5|6|7 |8|9 |10|11|12|
 ** |precision|width|#|0|-|+| |hh|h|ll|l |j |z |
 ** %[flags][width][.precision][length]specifier
-** specifier : s S p d D i o O u U x X c C b
+** specifier : c s p d i o u x X f
+** bonus : S D O U C b e 
 */
 
 typedef struct s_printf	t_printf;
@@ -111,6 +112,7 @@ int		string_handler(PF *argument, va_list ap);
 int		unsigned_handler(PF *argument, va_list ap);
 int		ft_arg_nospe(PF *argument, va_list ap);
 int		prc_handler(PF *argument, va_list ap);
+int		float_handler(PF *argument, va_list ap);
 
 /*
 ** FLAGS

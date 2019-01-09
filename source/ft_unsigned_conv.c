@@ -48,7 +48,7 @@ static int				unsigned_helper(PF *argument)
 		if (argument->spec == 'o' || argument->spec == 'O')
 		{
 			if (argument->flags[0] <= len && argument->arg[0] != '0')
-				argument->flags[0] = len + 1;
+				return (ft_print_number(argument, "0"));
 		}
 		else if (argument->spec == 'x' && nullstr != 0)
 			return (ft_print_number(argument, "0x"));
