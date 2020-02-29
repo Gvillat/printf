@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_conv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: guvillat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 17:35:56 by gvillat           #+#    #+#             */
-/*   Updated: 2016/09/27 17:35:59 by gvillat          ###   ########.fr       */
+/*   Created: 2019/01/23 15:27:43 by guvillat          #+#    #+#             */
+/*   Updated: 2019/01/23 15:27:43 by guvillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+void			ft_display(PF *argument)
+{
+	argument->ret += write(1, &g_buff, g_i);
+	ft_init_buff();
+}
 
 static int		wstring_handler(PF *argument, va_list ap)
 {
@@ -31,6 +37,7 @@ static int		wstring_handler(PF *argument, va_list ap)
 int				string_handler(PF *argument, va_list ap)
 {
 	ssize_t len;
+	char	*tmp;
 
 	if (argument->spec == 'S' || argument->flags[10] == 1)
 		return (wstring_handler(argument, ap));
@@ -39,7 +46,11 @@ int				string_handler(PF *argument, va_list ap)
 		argument->arg = "(null)";
 	len = ft_strlen(argument->arg);
 	if (argument->flags[0] > -1 && argument->flags[0] < len)
-		argument->arg = ft_strsub(argument->arg, 0, argument->flags[0]);
+	{
+		tmp = ft_strsub(argument->arg, 0, argument->flags[0]);
+		argument->arg = tmp;
+		free(tmp);
+	}
 	return (ft_print_str(argument));
 }
 
@@ -65,7 +76,7 @@ int				ft_print_str(PF *argument)
 	ft_buff(argument->arg, argument);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding, argument);
-	if (argument->spec == 'C' || argument->spec == 'S')
+	if ((argument->spec == 'C' || argument->spec == 'S'))
 		free(argument->arg);
 	return (0);
 }

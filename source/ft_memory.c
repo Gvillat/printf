@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: guvillat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 17:35:38 by gvillat           #+#    #+#             */
-/*   Updated: 2016/09/27 17:35:40 by gvillat          ###   ########.fr       */
+/*   Created: 2019/01/23 15:27:02 by guvillat          #+#    #+#             */
+/*   Updated: 2019/01/23 15:27:04 by guvillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		ft_check_spec_bis(PF *argument)
 		argument->spec = 'C';
 	else if (argument->format[argument->index] == 'f')
 		argument->spec = 'f';
-		else if (argument->format[argument->index] == 'F')
+	else if (argument->format[argument->index] == 'F')
 		argument->spec = 'f';
 	else
 		argument->spec = argument->format[argument->index];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_char_conv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: guvillat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 17:35:05 by gvillat           #+#    #+#             */
-/*   Updated: 2018/11/19 14:20:54 by guvillat         ###   ########.fr       */
+/*   Created: 2019/01/23 15:26:27 by guvillat          #+#    #+#             */
+/*   Updated: 2019/01/23 15:26:30 by guvillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int			wchar_handler(va_list ap, PF *argument)
 		ft_nputchar(' ', argument->flags[1] - 1, argument);
 		if (!argument->flags[4])
 			g_i++;
-		return(0);
+		return (0);
 	}
 	else if (c < 0)
 		return (-1);

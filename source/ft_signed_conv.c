@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signed_conv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvillat <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: guvillat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 17:35:51 by gvillat           #+#    #+#             */
-/*   Updated: 2016/09/27 17:35:53 by gvillat          ###   ########.fr       */
+/*   Created: 2019/01/23 15:27:37 by guvillat          #+#    #+#             */
+/*   Updated: 2019/01/23 15:27:38 by guvillat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,26 @@ static char			*test_string(PF *args)
 int					signed_handler(PF *argument, va_list ap)
 {
 	intmax_t	n;
-	
-	n = 0;
-	if (argument->spec == 'd' || argument->spec == 'i')
-		n = signed_cast(argument, ap);
-	else
-		n = (long int)va_arg(ap, intmax_t);
-	argument->arg = ft_itoa_base(n, 10);
-	if (n < 0)
+	char		*tmp;
+
+	n = (argument->spec == 'd' || argument->spec == 'i') ?
+	signed_cast(argument, ap) : (long int)va_arg(ap, intmax_t);
+	if (n >= 0)
 	{
-		free(argument->arg);
-		argument->arg = ft_itoa_base(-n, 10);
+		tmp = ft_itoa_base(n, 10);
+		argument->arg = tmp;
+		free(tmp);
+	}
+	else if (n < 0)
+	{
+		tmp = ft_itoa_base(-n, 10);
+		argument->arg = tmp;
+		free(tmp);
 		return (ft_print_number(argument, "-"));
 	}
-	else if (argument->flags[5])
+	if (argument->flags[5])
 		return (ft_print_number(argument, "+"));
-	else if (argument->flags[6])
+	if (argument->flags[6])
 		return (ft_print_number(argument, " "));
 	return (ft_print_number(argument, ""));
 }
@@ -82,7 +86,7 @@ static int			ft_print_number_bis(PF *argument, int padding)
 	ft_buff(argument->arg, argument);
 	if (argument->flags[4] == 1)
 		ft_nputchar(' ', padding, argument);
-	if (ft_strcmp(argument->arg, "0") != 0 && argument->flags[0] != 0)
+	if (argument->flags[0] && argument->spec == 'f')
 		free(argument->arg);
 	return (0);
 }
